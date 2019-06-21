@@ -16,11 +16,11 @@ public class Login extends BaseActivity<LoginPresenter> implements ILogin.View{
 
     @Override
     protected void initView() {
-
+        //视图初始化
     }
 
     @Override
     protected void onPrepare() {
-
+        //业务逻辑层
     }
 }

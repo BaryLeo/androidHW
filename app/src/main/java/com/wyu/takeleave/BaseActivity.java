@@ -31,6 +31,7 @@ public abstract class BaseActivity<T extends BaseActivityPresenter> extends AppC
             );
             window.setStatusBarColor(Color.TRANSPARENT);
         }
+
         RevampStatusBar.FlymeSetStatusBarLightMode(getWindow(),true);
         RevampStatusBar.MIUISetStatusBarLightMode(getWindow(),true);
         setContentView(getLayout());
