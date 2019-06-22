@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
+import com.wyu.takeleave.util.UserInfo;
+
 import java.io.Serializable;
 
 /**
@@ -14,6 +16,7 @@ public class IntentActivity{
 
     private static Intent intent;
 
+
     /**
      * 使用intent无数据跳转活动
      * @param context
@@ -22,6 +25,20 @@ public class IntentActivity{
     public static void intentWithoutData(Context context, Class<?> des){
         //context为开始的活动，des为目标活动
         intent=new Intent(context,des);
+        intent(context,intent);
+    }
+
+    /**
+     * 使用intent携带用户数据跳转活动
+     * context为开始的活动，des为目标活动,userInfo用户信息
+     * @param context
+     * @param des
+     * @param userInfo(传递的数据)
+     */
+    public static void intentWithData(Context context, Class<?> des, UserInfo userInfo){
+        intent=new Intent(context,des);
+        intent.putExtra("userName", userInfo.getName());
+        intent.putExtra("userId", userInfo.getId());
         intent(context,intent);
     }
 

@@ -1,6 +1,7 @@
 package com.wyu.takeleave.login;
 
 import com.wyu.takeleave.BaseActivityPresenter;
+import com.wyu.takeleave.util.UserInfo;
 
 public class LoginPresenter extends BaseActivityPresenter<Login> implements ILogin.Presenter{
     private ILogin.View view;
@@ -18,5 +19,23 @@ public class LoginPresenter extends BaseActivityPresenter<Login> implements ILog
         //解除引用，GC回收
         view = null;
         model = null;
+    }
+
+    @Override
+    public void HandleLogin(String id,String password) {
+        //这里进行数据对比
+        //假数据，测试用，需要删除
+        String a = "123";
+        String b = "123";
+        if (a.equals(id)&&b.equals(password)){
+            view.loginFailure(new String("账号密码正确"));
+            UserInfo userInfo = new UserInfo();
+            userInfo.setId(id);
+            userInfo.setName("asd");
+            userInfo.setUserType("老师");
+            view.toMain(userInfo);
+        }else {
+            view.loginFailure(new String("账号或者密码不正确"));
+        }
     }
 }

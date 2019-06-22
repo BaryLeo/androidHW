@@ -1,18 +1,13 @@
 package com.wyu.takeleave;
 
-import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
 
-import com.wyu.takeleave.gui.RevampStatusBar;
+import com.wyu.takeleave.util.RevampStatusBar;
 
 public abstract class BaseActivity<T extends BaseActivityPresenter> extends AppCompatActivity {
 

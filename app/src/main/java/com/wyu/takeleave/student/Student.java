@@ -1,20 +1,18 @@
 package com.wyu.takeleave.student;
 
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.widget.RelativeLayout;
+import android.support.design.widget.NavigationView;
+import android.widget.EditText;
 import android.widget.TextView;
 
-import com.scwang.smartrefresh.layout.SmartRefreshLayout;
-import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.wyu.takeleave.BaseActivity;
 import com.wyu.takeleave.R;
-import com.wyu.takeleave.gui.RevampStatusBar;
-import com.wyu.takeleave.gui.RevampToolbar;
+import com.wyu.takeleave.util.UserInfo;
 
 public class Student extends BaseActivity<StudentPresenter> implements IStudent.View{
+    //侧边栏组件
+    private NavigationView navigationView;
+    private TextView id;
+    private TextView name;
 
     @Override
     protected StudentPresenter initPresent() {
@@ -28,6 +26,13 @@ public class Student extends BaseActivity<StudentPresenter> implements IStudent.
 
     @Override
     protected void initView() {
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        //通过侧边栏组件，才能操作侧边栏里面的组件
+        id = navigationView.getHeaderView(0).findViewById(R.id.userId);
+        name = navigationView.getHeaderView(0).findViewById(R.id.userName);
+        id.setText(getIntent().getStringExtra("userId"));
+        name.setText(getIntent().getStringExtra("userName"));
+
     }
 
     @Override
