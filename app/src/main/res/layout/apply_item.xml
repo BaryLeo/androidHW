@@ -1,6 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/applyItem"
+    android:layout_width="match_parent"
+    android:background="@color/gray"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/corner"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="2dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2018/12/17 12:00"
+            android:textSize="20sp"
+            android:textColor="@color/green"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"/>
 
-</android.support.constraint.ConstraintLayout>
+        <TextView
+            android:id="@+id/status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="已通过"
+            android:textSize="12sp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/time"/>
+        <TextView
+            android:id="@+id/du"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="请假时长："
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:layout_below="@id/status"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="20dp"/>
+        <TextView
+            android:id="@+id/duration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16dp"
+            android:textColor="@color/black"
+            android:layout_toRightOf="@id/du"
+            android:layout_below="@id/status"
+            android:layout_marginTop="5dp"/>
+        <TextView
+            android:id="@+id/auditorName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="正在审核负责人："
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:layout_below="@id/du"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="20dp"/>
+        <TextView
+            android:id="@+id/auName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16dp"
+            android:layout_toRightOf="@id/auditorName"
+            android:layout_below="@id/duration"
+            android:layout_marginTop="5dp"/>
+        <TextView
+            android:id="@+id/rp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="教师留言："
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:layout_below="@id/auditorName"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="20dp"/>
+        <TextView
+            android:id="@+id/reply"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16dp"
+            android:textColor="@color/black"
+            android:layout_toRightOf="@id/rp"
+            android:layout_below="@id/auName"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="20dp"/>
+    </RelativeLayout>
+
+</RelativeLayout>

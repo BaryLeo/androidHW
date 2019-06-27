@@ -11,14 +11,17 @@
         android:theme="@style/AppTheme">
 
         <activity android:name=".start.Start">
+        </activity>
+        <activity android:name=".login.Login"/>
+        <activity android:name=".student.Student">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".login.Login"/>
-        <activity android:name=".student.Student"/>
-        <activity android:name=".teacher.Teacher"/>
+        <activity android:name=".teacher.Teacher">
+
+        </activity>
     </application>
 
 </manifest>
