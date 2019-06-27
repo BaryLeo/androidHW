@@ -27,6 +27,8 @@ public class TeacherPresenter extends BaseActivityPresenter<Teacher> implements 
 
     @Override
     public ArrayList<FormBrief> setViewData() {
+        //只需要给我一个arraylist就好了
+        //还有这个对象的特殊说明，特别是这个status,看一下这个实体类的注释
         ArrayList<FormBrief> formBriefs = new ArrayList<FormBrief>();
         for (int i =0;i<5;i++){
             FormBrief formBrief = new FormBrief();
