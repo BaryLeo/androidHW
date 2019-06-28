@@ -18,5 +18,6 @@ public interface ILogin {
 
     interface Model{
         void login(String id, String password, OnLoginListener loginListener);
+        void getUser(UserInfo userInfo);
     }
 }

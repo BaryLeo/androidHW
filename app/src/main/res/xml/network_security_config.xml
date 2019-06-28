@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--用于允许开启http请求-->
+<!--在API27即androidP以上，默认不允许非https链接-->
+<network-security-config>
+    <base-config cleartextTrafficPermitted="true" />
+</network-security-config>
