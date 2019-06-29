@@ -54,8 +54,9 @@ public class Login extends BaseActivity<LoginPresenter> implements ILogin.View{
     public void toMain(UserInfo userInfo) {
         if ("老师".equals(userInfo.getUserType())){
             Intent intent = new Intent(this,Teacher.class);
-            intent.putExtra("userId",userInfo.getId());
-            intent.putExtra("userName",userInfo.getName());
+//            intent.putExtra("userId",userInfo.getId());
+//            intent.putExtra("userName",userInfo.getName());
+            intent.putExtra("userInfo",userInfo);
             startActivity(intent);
             //销毁本activity，并回收内存
             IntentActivity.finishActivity(this);
@@ -63,8 +64,9 @@ public class Login extends BaseActivity<LoginPresenter> implements ILogin.View{
 
         if ("学生".equals(userInfo.getUserType())){
             Intent intent = new Intent(this,Student.class);
-            intent.putExtra("userId",userInfo.getId());
-            intent.putExtra("userName",userInfo.getName());
+//            intent.putExtra("userId",userInfo.getId());
+//            intent.putExtra("userName",userInfo.getName());
+            intent.putExtra("userInfo",userInfo);
             startActivity(intent);
             //销毁本activity，并回收内存
             IntentActivity.finishActivity(this);

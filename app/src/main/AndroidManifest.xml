@@ -14,13 +14,13 @@
         android:networkSecurityConfig="@xml/network_security_config">
 
         <activity android:name=".start.Start">
-        </activity>
-        <activity android:name=".login.Login"/>
-        <activity android:name=".student.Student">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".login.Login"/>
+        <activity android:name=".student.Student">
         </activity>
         <activity android:name=".teacher.Teacher">
 

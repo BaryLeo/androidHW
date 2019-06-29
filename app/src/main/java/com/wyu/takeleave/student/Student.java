@@ -41,14 +41,15 @@ public class Student extends BaseActivity<StudentPresenter> implements IStudent.
         //通过侧边栏组件，才能操作侧边栏里面的组件
         id = navigationView.getHeaderView(0).findViewById(R.id.userId);
         name = navigationView.getHeaderView(0).findViewById(R.id.userName);
-        id.setText(getIntent().getStringExtra("userId"));
-        name.setText(getIntent().getStringExtra("userName"));
+
 
         mRecyclerView = (RecyclerView) findViewById(R.id.main_recylist);
         //设置线性管理器
         mRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1));
         adapter = new FormBrielAdapter(presenter.setViewData());
         mRecyclerView.setAdapter(adapter);
+
+        presenter.handleGetUser(((UserInfo) getIntent().getSerializableExtra("userInfo")));
     }
 
     @Override
@@ -61,4 +62,12 @@ public class Student extends BaseActivity<StudentPresenter> implements IStudent.
     public void initRecycleView(ArrayList<FormBrief> formBriefs) {
 
     }
+
+    @Override
+    public void setView(UserInfo userInfo) {
+        id.setText(userInfo.getId());
+        name.setText(userInfo.getName());
+    }
+
+
 }

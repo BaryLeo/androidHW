@@ -8,6 +8,13 @@ import android.view.View;
 import android.view.Window;
 
 import com.wyu.takeleave.util.RevampStatusBar;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.cookie.CookieJarImpl;
+import com.zhy.http.okhttp.cookie.store.PersistentCookieStore;
+
+import java.util.concurrent.TimeUnit;
+
+import okhttp3.OkHttpClient;
 
 public abstract class BaseActivity<T extends BaseActivityPresenter> extends AppCompatActivity {
 
@@ -26,6 +33,15 @@ public abstract class BaseActivity<T extends BaseActivityPresenter> extends AppC
             );
             window.setStatusBarColor(Color.TRANSPARENT);
         }
+
+        CookieJarImpl cookieJar = new CookieJarImpl(new PersistentCookieStore(getApplicationContext()));
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .connectTimeout(10000L, TimeUnit.MILLISECONDS)
+                .readTimeout(10000L, TimeUnit.MILLISECONDS)
+                .cookieJar(cookieJar)
+                //其他配置
+                .build();
+        OkHttpUtils.initClient(okHttpClient);
 
         RevampStatusBar.FlymeSetStatusBarLightMode(getWindow(),true);
         RevampStatusBar.MIUISetStatusBarLightMode(getWindow(),true);
