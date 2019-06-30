@@ -28,5 +28,11 @@ captures/
 bin/
 gen/
 
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
 # Windows thumbnail db
 Thumbs.db
