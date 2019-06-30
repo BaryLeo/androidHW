@@ -11,7 +11,7 @@ public class Form extends BaseActivity<FormPresenter> implements IForm.View{
 
     @Override
     protected int getLayout() {
-        return R.layout.put_takeleave;
+        return R.layout.takeleave;
     }
 
     @Override

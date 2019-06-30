@@ -52,7 +52,7 @@ public class Login extends BaseActivity<LoginPresenter> implements ILogin.View{
 
     @Override
     public void toMain(UserInfo userInfo) {
-        if ("老师".equals(userInfo.getUserType())){
+        if ("老师".equals(userInfo.getUserType())||"辅导员".equals(userInfo.getUserType())){
             Intent intent = new Intent(this,Teacher.class);
 //            intent.putExtra("userId",userInfo.getId());
 //            intent.putExtra("userName",userInfo.getName());
@@ -62,7 +62,7 @@ public class Login extends BaseActivity<LoginPresenter> implements ILogin.View{
             IntentActivity.finishActivity(this);
         }
 
-        if ("学生".equals(userInfo.getUserType())){
+        if ("学生".equals(userInfo.getUserType())||"班级管理员".equals(userInfo.getUserType())){
             Intent intent = new Intent(this,Student.class);
 //            intent.putExtra("userId",userInfo.getId());
 //            intent.putExtra("userName",userInfo.getName());
