@@ -3,6 +3,7 @@ package com.wyu.takeleave.teacher;
 import com.wyu.takeleave.BaseActivityPresenter;
 import com.wyu.takeleave.form.Form;
 import com.wyu.takeleave.util.FormBrief;
+import com.wyu.takeleave.util.UserInfo;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -38,5 +39,11 @@ public class TeacherPresenter extends BaseActivityPresenter<Teacher> implements 
             formBriefs.add(formBrief);
         }
         return formBriefs;
+    }
+
+    @Override
+    public Boolean logout() {
+        //处理注销事件
+        return false;
     }
 }
