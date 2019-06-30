@@ -1,20 +1,30 @@
 package com.wyu.takeleave.student;
 
+
+import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.EditText;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.wyu.takeleave.BaseActivity;
+import com.wyu.takeleave.IntentActivity;
 import com.wyu.takeleave.R;
+import com.wyu.takeleave.form.Form;
+import com.wyu.takeleave.login.Login;
+import com.wyu.takeleave.teacher.Teacher;
 import com.wyu.takeleave.util.FormBrief;
 import com.wyu.takeleave.util.FormBrielAdapter;
-import com.wyu.takeleave.util.TakeLeaveForm;
 import com.wyu.takeleave.util.UserInfo;
 
 import java.util.ArrayList;
@@ -42,7 +52,10 @@ public class Student extends BaseActivity<StudentPresenter> implements IStudent.
 
     @Override
     protected void initView() {
+        presenter.handleGetUser(((UserInfo) getIntent().getSerializableExtra("userInfo")));
+        Toolbar toolbar = findViewById(R.id.toolbar);
         navigationView = (NavigationView) findViewById(R.id.nav_view);
+
         //通过侧边栏组件，才能操作侧边栏里面的组件
         id = navigationView.getHeaderView(0).findViewById(R.id.userId);
         name = navigationView.getHeaderView(0).findViewById(R.id.userName);
@@ -54,8 +67,46 @@ public class Student extends BaseActivity<StudentPresenter> implements IStudent.
         adapter = new FormBrielAdapter(presenter.setViewData());
         mRecyclerView.setAdapter(adapter);
 
-
-        presenter.handleGetUser(((UserInfo) getIntent().getSerializableExtra("userInfo")));
+        //响应侧边栏按钮
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                switch (menuItem.getItemId()) {
+                    case R.id.allApply:{
+                        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+                        drawer.closeDrawer(GravityCompat.START);
+                        break;
+                    }
+                    case R.id.noCheckApply:{
+                        /**
+                         * 跳转到表单编辑页面
+                         */
+                        Intent intent = new Intent(Student.this, Form.class);
+                        intent.putExtra("userInfo",((UserInfo) getIntent().getSerializableExtra("userInfo")));
+                        startActivity(intent);
+                        //销毁本activity，并回收内存
+                        IntentActivity.finishActivity(Student.this);
+                        break;
+                    }
+                    case R.id.nav_share:{
+                        /**
+                         * 处理注销事件
+                         */
+                        if (presenter.logout()){
+                            Toast.makeText(Student.this, "注销成功", Toast.LENGTH_SHORT).show();
+                            //不携带数据跳转
+                            IntentActivity.intentWithoutData(Student.this, Login.class);
+                            //销毁本activity，并回收内存
+                            IntentActivity.finishActivity(Student.this);
+                        }else {
+                            Toast.makeText(Student.this, "注销失败", Toast.LENGTH_SHORT).show();
+                        }
+                        break;
+                    }
+                }
+                return true;
+            }
+        });
     }
 
     @Override
@@ -81,10 +132,6 @@ public class Student extends BaseActivity<StudentPresenter> implements IStudent.
                 refreshlayout.finishRefresh(1000/*,false*/);
             }
         });
-
-
-        //响应侧边栏按钮
-
     }
 
 
@@ -98,6 +145,5 @@ public class Student extends BaseActivity<StudentPresenter> implements IStudent.
         id.setText(userInfo.getId());
         name.setText(userInfo.getName());
     }
-
 
 }

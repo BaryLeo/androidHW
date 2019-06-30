@@ -14,6 +14,7 @@ public interface IStudent {
 
     interface Presenter{
         ArrayList<FormBrief> setViewData();
+        Boolean logout();
         void handleGetUser(UserInfo userInfo);
     }
 

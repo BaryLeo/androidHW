@@ -51,4 +51,10 @@ public class StudentPresenter extends BaseActivityPresenter<Student> implements 
         }
         return formBriefs;
     }
+
+    @Override
+    public Boolean logout() {
+        //处理注销事件
+        return true;
+    }
 }
