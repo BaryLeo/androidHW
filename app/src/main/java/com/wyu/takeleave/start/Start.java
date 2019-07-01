@@ -39,7 +39,7 @@ public class Start extends BaseActivity<StartPresenter> implements IStart.View{
                 intentToLogin();
 
             }
-        },2000);
+        },1000);
     }
 
     @Override

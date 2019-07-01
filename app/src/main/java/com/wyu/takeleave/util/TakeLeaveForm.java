@@ -14,8 +14,6 @@ public class TakeLeaveForm {
 
     private String major;
 
-    private String major_branch;
-
     private String guardian_tel;
 
     private String guardian_name;
@@ -74,14 +72,6 @@ public class TakeLeaveForm {
 
     public void setMajor(String major) {
         this.major = major;
-    }
-
-    public String getMajor_branch() {
-        return major_branch;
-    }
-
-    public void setMajor_branch(String major_branch) {
-        this.major_branch = major_branch;
     }
 
     public String getGuardian_tel() {
