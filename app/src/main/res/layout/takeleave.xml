@@ -43,6 +43,7 @@
                     android:textSize="16sp"
                     android:layout_marginLeft="5dp"/>
                 <EditText
+                    android:id="@+id/name"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_toRightOf="@id/nameTitle"
@@ -67,6 +68,7 @@
                     android:textSize="16sp"
                     android:layout_marginLeft="5dp"/>
                 <EditText
+                    android:id="@+id/Id"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_toRightOf="@id/idTitle"
@@ -91,6 +93,7 @@
                     android:textSize="16sp"
                     android:layout_marginLeft="5dp"/>
                 <EditText
+                    android:id="@+id/college"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_toRightOf="@id/collegeTitle"
@@ -115,6 +118,7 @@
                     android:textSize="16sp"
                     android:layout_marginLeft="5dp"/>
                 <EditText
+                    android:id="@+id/major"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_toRightOf="@id/majorTitle"
@@ -139,6 +143,7 @@
                     android:textSize="16sp"
                     android:layout_marginLeft="5dp"/>
                 <EditText
+                    android:id="@+id/classId"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_toRightOf="@id/classIdTitle"
@@ -163,6 +168,7 @@
                     android:textSize="16sp"
                     android:layout_marginLeft="5dp"/>
                 <EditText
+                    android:id="@+id/tel"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_toRightOf="@id/telTitle"
@@ -187,6 +193,7 @@
                     android:textSize="16sp"
                     android:layout_marginLeft="5dp"/>
                 <EditText
+                    android:id="@+id/guaarder"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_toRightOf="@id/guaarderTitle"
@@ -211,6 +218,7 @@
                     android:textSize="16sp"
                     android:layout_marginLeft="5dp"/>
                 <EditText
+                    android:id="@+id/guaarderTel"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_toRightOf="@id/guaarderTelTitle"
@@ -244,6 +252,7 @@
                     android:textSize="16sp"
                     android:layout_marginLeft="5dp"/>
                 <EditText
+                    android:id="@+id/beginTime"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_toRightOf="@id/benginTimeTitle"
@@ -268,6 +277,7 @@
                     android:textSize="16sp"
                     android:layout_marginLeft="5dp"/>
                 <EditText
+                    android:id="@+id/deadTime"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_toRightOf="@id/deadTimeTitle"
@@ -292,6 +302,7 @@
                     android:textSize="16sp"
                     android:layout_marginLeft="5dp"/>
                 <EditText
+                    android:id="@+id/days"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_toRightOf="@id/daysTitle"
@@ -317,11 +328,12 @@
                     android:textSize="16sp"
                     android:layout_marginLeft="5dp"/>
                 <EditText
+                    android:id="@+id/reson"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@id/resonTitle"
                     android:background="@color/white"
-                    android:hint="请输入专业名称"
+                    android:hint="请输入请假理由"
                     android:textSize="16sp"
                     android:layout_marginTop="15dp"
                     android:layout_marginBottom="15dp"
@@ -330,6 +342,7 @@
             </RelativeLayout>
 
             <Button
+                android:id="@+id/button"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginTop="10dp"

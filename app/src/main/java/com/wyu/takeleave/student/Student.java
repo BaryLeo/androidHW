@@ -53,7 +53,6 @@ public class Student extends BaseActivity<StudentPresenter> implements IStudent.
     @Override
     protected void initView() {
         presenter.handleGetUser(((UserInfo) getIntent().getSerializableExtra("userInfo")));
-        Toolbar toolbar = findViewById(R.id.toolbar);
         navigationView = (NavigationView) findViewById(R.id.nav_view);
 
         //通过侧边栏组件，才能操作侧边栏里面的组件
@@ -84,7 +83,6 @@ public class Student extends BaseActivity<StudentPresenter> implements IStudent.
                         intent.putExtra("userInfo",((UserInfo) getIntent().getSerializableExtra("userInfo")));
                         startActivity(intent);
                         //销毁本activity，并回收内存
-                        IntentActivity.finishActivity(Student.this);
                         break;
                     }
                     case R.id.nav_share:{

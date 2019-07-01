@@ -12,6 +12,7 @@ public interface IStudent {
         void initRecycleView(ArrayList<FormBrief> formBriefs);
         void setView(UserInfo userInfo);
         void setListView(ArrayList<FormBrief> formBriefs);
+        void refresh();
     }
 
     interface Presenter{
