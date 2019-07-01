@@ -1,6 +1,7 @@
 package com.wyu.takeleave.student;
 
 import com.wyu.takeleave.BaseActivityPresenter;
+import com.wyu.takeleave.ValueCallBack;
 import com.wyu.takeleave.util.FormBrief;
 import com.wyu.takeleave.util.UserInfo;
 
@@ -27,30 +28,34 @@ public class StudentPresenter extends BaseActivityPresenter<Student> implements 
 
     @Override
     public void handleGetUser(UserInfo userInfo) {
-        model.getUser(userInfo, new OnGettingDataListener() {
+        model.getUser(userInfo, new ValueCallBack<UserInfo>() {
             @Override
-            public void gettingSuccess(UserInfo userInfo) {
+            public void onSuccess(UserInfo userInfo) {
                 view.setView(userInfo);
             }
 
             @Override
-            public void gettingFailed() {
+            public void onFail(String msg) {
 
             }
         });
     }
 
     @Override
-    public ArrayList<FormBrief> setViewData() {
-        ArrayList<FormBrief> formBriefs = new ArrayList<FormBrief>();
-        for (int i =0;i<5;i++){
-            FormBrief formBrief = new FormBrief();
-            formBrief.setTime(new Date());
-            formBrief.setStatus(i);
-            formBriefs.add(formBrief);
-        }
-        return formBriefs;
+    public void handleGetTakeLeave() {
+        model.getTakeLeaveForm(new ValueCallBack<ArrayList<FormBrief>>() {
+            @Override
+            public void onSuccess(ArrayList<FormBrief> formBriefs) {
+                view.setListView(formBriefs);
+            }
+
+            @Override
+            public void onFail(String msg) {
+
+            }
+        });
     }
+
 
     @Override
     public Boolean logout() {

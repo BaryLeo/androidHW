@@ -1,9 +1,14 @@
 package com.wyu.takeleave.student;
 
+import com.wyu.takeleave.ValueCallBack;
+import com.wyu.takeleave.util.FormBrief;
 import com.wyu.takeleave.util.MyOkHttpUtils;
 import com.wyu.takeleave.util.UserInfo;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
+
+import java.util.ArrayList;
+import java.util.Date;
 
 import okhttp3.Call;
 
@@ -168,10 +173,11 @@ class UserData {
 public class StudentModel implements IStudent.Model{
 
     private final String GETUSER = "http://appcat.site/api/getUser";
+    private final String GETFORM = "http://appcat.site/api/student/getTakeLeaveForm";
     private UserInfo localUserInfo = new UserInfo();
 
     @Override
-    public void getUser(UserInfo userInfo, OnGettingDataListener gettingDataListener) {
+    public void getUser(UserInfo userInfo, ValueCallBack<UserInfo> callBack) {
         try{
             OkHttpUtils
                     .post()
@@ -181,7 +187,7 @@ public class StudentModel implements IStudent.Model{
                         @Override
                         public void onError(Call call, Exception e, int id) {
                             e.printStackTrace();
-                            gettingDataListener.gettingFailed();
+                            callBack.onFail(e.toString());
                         }
 
                         @Override
@@ -192,7 +198,43 @@ public class StudentModel implements IStudent.Model{
                                 localUserInfo.setName(userInfo.getName());
                                 localUserInfo.setUserType(userInfo.getUserType());
                                 localUserInfo.setId(userInfo.getId());
-                                gettingDataListener.gettingSuccess(localUserInfo);
+                                callBack.onSuccess(localUserInfo);
+                            }
+                        }
+                    });
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void getTakeLeaveForm(ValueCallBack<ArrayList<FormBrief>> gettingTakeLeaveListener) {
+        try{
+            OkHttpUtils
+                    .post()
+                    .url(GETFORM)
+                    .build()
+                    .execute(new StringCallback() {
+                        @Override
+                        public void onError(Call call, Exception e, int id) {
+                            e.printStackTrace();
+                        }
+
+                        @Override
+                        public void onResponse(String response, int id) {
+                            if(!response.equals("")){
+                                StudentLeaveInfo info = (StudentLeaveInfo) MyOkHttpUtils.parseJSONWithGSON(response, StudentLeaveInfo.class);
+                                ArrayList<FormBrief> formBriefs = new ArrayList<FormBrief>();
+                                for(int i = 0; i < info.getContent().size(); i++){
+                                    FormBrief data = new FormBrief();
+                                    //data.setAuditor();
+                                    data.setDuration(info.getContent().get(i).getTakeDays());
+                                    //data.setReply();
+                                    //data.setStatus();
+                                    data.setTime(new Date(info.getContent().get(i).getApplyTime()));
+                                    formBriefs.add(data);
+                                }
+                                gettingTakeLeaveListener.onSuccess(formBriefs);
                             }
                         }
                     });

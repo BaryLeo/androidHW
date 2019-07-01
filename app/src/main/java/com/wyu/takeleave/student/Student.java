@@ -64,8 +64,7 @@ public class Student extends BaseActivity<StudentPresenter> implements IStudent.
         mRecyclerView = (RecyclerView) findViewById(R.id.main_recylist);
         //设置线性管理器
         mRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1));
-        adapter = new FormBrielAdapter(presenter.setViewData());
-        mRecyclerView.setAdapter(adapter);
+        presenter.handleGetTakeLeave();
 
         //响应侧边栏按钮
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -112,26 +111,27 @@ public class Student extends BaseActivity<StudentPresenter> implements IStudent.
     @Override
     protected void onPrepare() {
         //页面刷新响应
-        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
-            ArrayList<FormBrief> formBriefArrayList;
-            @Override
-            public void onRefresh(RefreshLayout refreshlayout) {
-                //进行网络请求
-                formBriefArrayList = presenter.setViewData();
-                if (formBriefArrayList==null){
-                    refreshlayout.finishRefresh(2000,false);//传入false表示刷新失败
-                    Toast.makeText(Student.this,"刷新失败",Toast.LENGTH_SHORT).show();
-                }else {
-                    //更新adapter内部数据
-                    Student.this.adapter=new FormBrielAdapter(formBriefArrayList);
-                    //刷新recycleView
-                    Student.this.adapter.notifyDataSetChanged();
-                    Toast.makeText(Student.this,"刷新成功",Toast.LENGTH_SHORT).show();
-                    refreshlayout.finishRefresh(1000/*,false*/);
-                }
-                refreshlayout.finishRefresh(1000/*,false*/);
-            }
-        });
+        //先注掉，这里逻辑出问题
+//        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
+//            ArrayList<FormBrief> formBriefArrayList;
+//            @Override
+//            public void onRefresh(RefreshLayout refreshlayout) {
+//                //进行网络请求
+//                formBriefArrayList = presenter.setViewData();
+//                if (formBriefArrayList==null){
+//                    refreshlayout.finishRefresh(2000,false);//传入false表示刷新失败
+//                    Toast.makeText(Student.this,"刷新失败",Toast.LENGTH_SHORT).show();
+//                }else {
+//                    //更新adapter内部数据
+//                    Student.this.adapter=new FormBrielAdapter(formBriefArrayList);
+//                    //刷新recycleView
+//                    Student.this.adapter.notifyDataSetChanged();
+//                    Toast.makeText(Student.this,"刷新成功",Toast.LENGTH_SHORT).show();
+//                    refreshlayout.finishRefresh(1000/*,false*/);
+//                }
+//                refreshlayout.finishRefresh(1000/*,false*/);
+//            }
+//        });
     }
 
 
@@ -144,6 +144,12 @@ public class Student extends BaseActivity<StudentPresenter> implements IStudent.
     public void setView(UserInfo userInfo) {
         id.setText(userInfo.getId());
         name.setText(userInfo.getName());
+    }
+
+    @Override
+    public void setListView(ArrayList<FormBrief> formBriefs){
+        adapter = new FormBrielAdapter(formBriefs);
+        mRecyclerView.setAdapter(adapter);
     }
 
 }
