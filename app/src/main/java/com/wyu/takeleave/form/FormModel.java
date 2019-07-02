@@ -6,7 +6,6 @@ import com.wyu.takeleave.util.TakeLeaveForm;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import okhttp3.Call;

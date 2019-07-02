@@ -57,6 +57,8 @@ public class Teacher extends BaseActivity<TeacherPresenter> implements ITeacher.
 
     @Override
     protected void initView() {
+        presenter.handleGetTakeLeaveForms();  //开始之前，先获取到信息并set好
+
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         /**
          * 通过侧边栏组件，才能操作侧边栏里面的组件
@@ -69,14 +71,14 @@ public class Teacher extends BaseActivity<TeacherPresenter> implements ITeacher.
          * 设置线性管理器
          */
         mRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1));
-        adapter = new FormBrielAdapter(presenter.setViewData());
+        adapter = new FormBrielAdapter(formBriefs);
         adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 intent = new Intent(Teacher.this, Form.class);
                 intent.putExtra("userInfo",((UserInfo) getIntent().getSerializableExtra("userInfo")));
                 intent.putExtra("isPut",0);
-                presenter.getTakeLeaveForm(formBriefs.get(position).getFormID());
+                presenter.handleGetTakeLeaveForm(formBriefs.get(position).getFormID());
             }
 
 
@@ -94,7 +96,7 @@ public class Teacher extends BaseActivity<TeacherPresenter> implements ITeacher.
                         /**
                          * 更新adapter内部数据
                          */
-                        Teacher.this.adapter=new FormBrielAdapter(presenter.setViewData());
+                        Teacher.this.adapter=new FormBrielAdapter(formBriefs);
                         /**
                          * 刷新recycleView
                          */
@@ -105,7 +107,7 @@ public class Teacher extends BaseActivity<TeacherPresenter> implements ITeacher.
                     }
                     case R.id.noCheckApply:{
                         ArrayList<FormBrief> formBriefs= new ArrayList<>();
-                        for (FormBrief formBrief:presenter.setViewData()){
+                        for (FormBrief formBrief:formBriefs){
                             if (formBrief.getStatus()==2||formBrief.getStatus()==3||formBrief.getStatus()==4){
                                 formBriefs.add(formBrief);
                             }
@@ -120,7 +122,7 @@ public class Teacher extends BaseActivity<TeacherPresenter> implements ITeacher.
                     }
                     case R.id.checkedApply:{
                         ArrayList<FormBrief> formBriefs= new ArrayList<>();
-                        for (FormBrief formBrief:presenter.setViewData()){
+                        for (FormBrief formBrief:formBriefs){
                             if (formBrief.getStatus()==0||formBrief.getStatus()==1){
                                 formBriefs.add(formBrief);
                             }
@@ -193,20 +195,26 @@ public class Teacher extends BaseActivity<TeacherPresenter> implements ITeacher.
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
                 //进行网络请求
-                formBriefArrayList = presenter.setViewData();
-                if (formBriefArrayList==null){
-                    refreshlayout.finishRefresh(1000,false);//传入false表示刷新失败
-                    Toast.makeText(Teacher.this,"刷新失败",Toast.LENGTH_SHORT).show();
-                }else {
-                    //更新adapter内部数据
-                    Teacher.this.adapter=new FormBrielAdapter(formBriefArrayList);
-                    //刷新recycleView
-                    Teacher.this.adapter.notifyDataSetChanged();
-                    Toast.makeText(Teacher.this,"刷新成功",Toast.LENGTH_SHORT).show();
-                    refreshlayout.finishRefresh(1000/*,false*/);
-                }
-                refreshlayout.finishRefresh(1000/*,false*/);
+                //TODO:这里还要做处理，网络请求不是简单的set即可
+//                formBriefArrayList = presenter.setViewData();
+//                if (formBriefArrayList==null){
+//                    refreshlayout.finishRefresh(1000,false);//传入false表示刷新失败
+//                    Toast.makeText(Teacher.this,"刷新失败",Toast.LENGTH_SHORT).show();
+//                }else {
+//                    //更新adapter内部数据
+//                    Teacher.this.adapter=new FormBrielAdapter(formBriefArrayList);
+//                    //刷新recycleView
+//                    Teacher.this.adapter.notifyDataSetChanged();
+//                    Toast.makeText(Teacher.this,"刷新成功",Toast.LENGTH_SHORT).show();
+//                    refreshlayout.finishRefresh(1000/*,false*/);
+//                }
+//                refreshlayout.finishRefresh(1000/*,false*/);
             }
         });
+    }
+
+    @Override
+    public void setFormBriefs(ArrayList<FormBrief> formBriefs) {
+        this.formBriefs = formBriefs;
     }
 }

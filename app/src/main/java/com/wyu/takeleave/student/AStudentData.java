@@ -1,6 +1,7 @@
 package com.wyu.takeleave.student;
 
-public class AUserData {
+//JSON解析类，这个用于解析GetUser接口
+public class AStudentData {
 
     public class Content {
         private String gender;

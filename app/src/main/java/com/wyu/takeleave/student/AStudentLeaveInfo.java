@@ -2,7 +2,7 @@ package com.wyu.takeleave.student;
 
 import java.util.List;
 
-public class StudentLeaveInfo {
+public class AStudentLeaveInfo {
 
     public class Content {
         private String college;

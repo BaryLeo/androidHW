@@ -7,18 +7,11 @@ import com.wyu.takeleave.util.UserInfo;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 import okhttp3.Call;
 
-interface OnGettingDataListener{
-    void gettingSuccess(UserInfo userInfo);
-    void gettingFailed();
-}
 
-//JSON解析类，这个用于解析GetUser接口
 
 
 public class StudentModel implements IStudent.Model{
@@ -49,8 +42,7 @@ public class StudentModel implements IStudent.Model{
                         @Override
                         public void onResponse(String response, int id) {
                             if(!response.equals("")){
-                                AUserData data = (AUserData) MyOkHttpUtils.parseJSONWithGSON(response, AUserData.class);
-                                //userInfo.setName(data.getContent().getUsername());
+                                AStudentData data = (AStudentData) MyOkHttpUtils.parseJSONWithGSON(response, AStudentData.class);
                                 localUserInfo.setName(data.getContent().getUsername());
                                 localUserInfo.setUserType(userInfo.getUserType());
                                 localUserInfo.setId(data.getContent().getUserId());
@@ -82,7 +74,7 @@ public class StudentModel implements IStudent.Model{
                         @Override
                         public void onResponse(String response, int id) {
                             if(!response.equals("")){
-                                StudentLeaveInfo info = (StudentLeaveInfo) MyOkHttpUtils.parseJSONWithGSON(response, StudentLeaveInfo.class);
+                                AStudentLeaveInfo info = (AStudentLeaveInfo) MyOkHttpUtils.parseJSONWithGSON(response, AStudentLeaveInfo.class);
                                 ArrayList<FormBrief> formBriefs = new ArrayList<FormBrief>();
                                 for(int i = 0; i < info.getContent().size(); i++){
                                     FormBrief data = new FormBrief();
@@ -90,13 +82,7 @@ public class StudentModel implements IStudent.Model{
                                     data.setDuration(info.getContent().get(i).getTakeDays());
                                     //data.setReply();
                                     //data.setStatus();
-                                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                                    try {
-                                        Date date = simpleDateFormat.parse(info.getContent().get(i).getApplyTime());
-                                        data.setTime(date);
-                                    }catch (Exception e){
-                                        e.printStackTrace();
-                                    }
+                                    data.setTime(info.getContent().get(i).getApplyTime());
                                     formBriefs.add(data);
                                 }
                                 gettingTakeLeaveListener.onSuccess(formBriefs);
