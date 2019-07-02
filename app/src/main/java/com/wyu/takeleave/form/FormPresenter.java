@@ -1,6 +1,7 @@
 package com.wyu.takeleave.form;
 
 import com.wyu.takeleave.BaseActivityPresenter;
+import com.wyu.takeleave.ValueCallBack;
 import com.wyu.takeleave.util.TakeLeaveForm;
 import com.wyu.takeleave.util.UserInfo;
 
@@ -23,9 +24,19 @@ public class FormPresenter extends BaseActivityPresenter<Form> implements IForm.
     }
 
     @Override
-    public void putTakeLeaveForm(TakeLeaveForm takeLeaveForm) {
+    public void handlePutTakeLeaveForm(TakeLeaveForm takeLeaveForm) {
         //当提交新表单是，从这里传入数据
+        model.putTakeLeaveForm(takeLeaveForm, new ValueCallBack<String>() {
+            @Override
+            public void onSuccess(String s) {
+                view.handleApplySuccess(s);
+            }
 
+            @Override
+            public void onFail(String msg) {
+                view.handleApplyFail(msg);
+            }
+        });
     }
 
     @Override

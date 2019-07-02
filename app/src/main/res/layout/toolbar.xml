@@ -31,7 +31,8 @@
                 android:layout_marginBottom="20dp"
                 android:textSize="20sp"
                 android:text="请假小助手"
-                android:id="@+id/toolbarText"/>
+                android:id="@+id/toolbarText"
+                android:textColor="#FFF"/>
 
         </RelativeLayout>
 

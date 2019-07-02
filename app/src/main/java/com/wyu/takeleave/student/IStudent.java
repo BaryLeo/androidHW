@@ -19,10 +19,12 @@ public interface IStudent {
         Boolean logout();
         void handleGetUser(UserInfo userInfo);
         void handleGetTakeLeave();
+        UserInfo handleGetUserInfo();  //P层获取用户信息
     }
 
     interface Model{
         void getUser(UserInfo userInfo, ValueCallBack<UserInfo> gettingDataListener);
         void getTakeLeaveForm(ValueCallBack<ArrayList<FormBrief>> gettingTakeLeaveListener);
+        UserInfo getUserInfo();  //M层获取用户信息
     }
 }

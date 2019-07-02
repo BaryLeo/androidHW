@@ -191,6 +191,7 @@ public class Form extends BaseActivity<FormPresenter> implements IForm.View{
                     takeLeaveForm.setStudent_tel(tel.getText().toString());
                     takeLeaveForm.setGuardian_name(guaarder.getText().toString());
                     takeLeaveForm.setGuardian_tel(guaarderTel.getText().toString());
+                    takeLeaveForm.setReason(reason.getText().toString());
 
                     check.add(tel.getText().toString().trim());
                     check.add(guaarder.getText().toString().trim());
@@ -210,7 +211,7 @@ public class Form extends BaseActivity<FormPresenter> implements IForm.View{
                         }
                     }
                     if (isFull){
-                        presenter.putTakeLeaveForm(takeLeaveForm);
+                        presenter.handlePutTakeLeaveForm(takeLeaveForm);
                     }
 
                 }
@@ -226,8 +227,9 @@ public class Form extends BaseActivity<FormPresenter> implements IForm.View{
 
 
     @Override
-    public void handleApplySuccess() {
+    public void handleApplySuccess(String msg) {
         if ("学生".equals(userInfo.getUserType())||"班级管理员".equals(userInfo.getUserType())){
+            Toast.makeText(Form.this,msg,Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(Form.this,Student.class);
             intent.putExtra("userInfo",userInfo);
             startActivity(intent);
@@ -236,6 +238,7 @@ public class Form extends BaseActivity<FormPresenter> implements IForm.View{
         }
 
         if ("老师".equals(userInfo.getUserType())||"辅导员".equals(userInfo.getUserType())){
+            Toast.makeText(Form.this,msg,Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(Form.this,Teacher.class);
             intent.putExtra("userInfo",userInfo);
             startActivity(intent);

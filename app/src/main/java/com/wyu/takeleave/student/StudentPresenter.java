@@ -56,6 +56,11 @@ public class StudentPresenter extends BaseActivityPresenter<Student> implements 
         });
     }
 
+    @Override
+    public UserInfo handleGetUserInfo() {
+        return model.getUserInfo();
+    }
+
 
     @Override
     public Boolean logout() {

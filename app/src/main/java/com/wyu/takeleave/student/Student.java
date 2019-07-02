@@ -80,7 +80,7 @@ public class Student extends BaseActivity<StudentPresenter> implements IStudent.
                          * 跳转到表单编辑页面
                          */
                         Intent intent = new Intent(Student.this, Form.class);
-                        intent.putExtra("userInfo",((UserInfo) getIntent().getSerializableExtra("userInfo")));
+                        intent.putExtra("userInfo", presenter.handleGetUserInfo());
                         startActivity(intent);
                         //销毁本activity，并回收内存
                         break;
