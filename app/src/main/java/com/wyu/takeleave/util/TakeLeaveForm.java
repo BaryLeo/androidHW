@@ -1,9 +1,10 @@
 package com.wyu.takeleave.util;
 
+import java.io.Serializable;
 import java.util.Date;
 
 //表单实体
-public class TakeLeaveForm {
+public class TakeLeaveForm implements Serializable {
     private Integer form_id;
 
     private String user_id;

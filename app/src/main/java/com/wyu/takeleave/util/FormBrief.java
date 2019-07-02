@@ -1,16 +1,18 @@
 package com.wyu.takeleave.util;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class FormBrief {
+public class FormBrief implements Serializable {
     //申请时间
-    private Date time;
+    private String time;
     //0 拒绝，1通过，2班导审批，3辅导员审批，4院长审批
     private int status;
     private String auditor;
     //请假时长
     private String duration;
     private String reply;
+    private int formID;
 
     public FormBrief(){
         status = 2;
@@ -18,11 +20,20 @@ public class FormBrief {
         duration = "获取失败";
         reply = "无";
     }
-    public Date getTime() {
+
+    public int getFormID() {
+        return formID;
+    }
+
+    public void setFormID(int formID) {
+        this.formID = formID;
+    }
+
+    public String getTime() {
         return time;
     }
 
-    public void setTime(Date time) {
+    public void setTime(String time) {
         this.time = time;
     }
 

@@ -3,8 +3,10 @@ package com.wyu.takeleave.student;
 import com.wyu.takeleave.BaseActivityPresenter;
 import com.wyu.takeleave.ValueCallBack;
 import com.wyu.takeleave.util.FormBrief;
+import com.wyu.takeleave.util.TakeLeaveForm;
 import com.wyu.takeleave.util.UserInfo;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -39,6 +41,25 @@ public class StudentPresenter extends BaseActivityPresenter<Student> implements 
 
             }
         });
+    }
+
+    @Override
+    public void getTakeLeaveForm(int formID) {
+        //调用view.setTakeLeaveForm();
+        TakeLeaveForm takeLeaveForm = new TakeLeaveForm();
+        takeLeaveForm.setGuardian_tel("1");
+        takeLeaveForm.setGuardian_name("1");
+        takeLeaveForm.setStudent_tel("1");
+        takeLeaveForm.setMajor("1");
+        takeLeaveForm.setClass_id("1");
+        takeLeaveForm.setCollege("1");
+        takeLeaveForm.setUser_id("1");
+        takeLeaveForm.setUsername("1");
+        takeLeaveForm.setTake_days("1");
+        takeLeaveForm.setDead_days("1");
+        takeLeaveForm.setBegin_days("1");
+        takeLeaveForm.setReason("1");
+        view.setTakeLeaveForm(takeLeaveForm);
     }
 
     @Override

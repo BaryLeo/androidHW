@@ -9,10 +9,14 @@ import java.util.ArrayList;
 
 public interface IStudent {
     interface View{
-        void initRecycleView(ArrayList<FormBrief> formBriefs);
         void setView(UserInfo userInfo);
         void setListView(ArrayList<FormBrief> formBriefs);
         void refresh();
+        void setTakeLeaveForm(TakeLeaveForm takeLeaveForm);
+        //获取表单成功时，跳转
+        void toFormView();
+        //获取失败
+        void fail(String msg);
     }
 
     interface Presenter{
@@ -20,6 +24,7 @@ public interface IStudent {
         void handleGetUser(UserInfo userInfo);
         void handleGetTakeLeave();
         UserInfo handleGetUserInfo();  //P层获取用户信息
+        void getTakeLeaveForm(int formID);
     }
 
     interface Model{

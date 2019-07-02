@@ -1,5 +1,6 @@
 package com.wyu.takeleave.teacher;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -9,6 +10,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,10 +19,12 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.wyu.takeleave.BaseActivity;
 import com.wyu.takeleave.IntentActivity;
 import com.wyu.takeleave.R;
+import com.wyu.takeleave.form.Form;
 import com.wyu.takeleave.login.Login;
 import com.wyu.takeleave.student.Student;
 import com.wyu.takeleave.util.FormBrief;
 import com.wyu.takeleave.util.FormBrielAdapter;
+import com.wyu.takeleave.util.OnItemClickListener;
 import com.wyu.takeleave.util.TakeLeaveForm;
 import com.wyu.takeleave.util.UserInfo;
 
@@ -36,6 +40,9 @@ public class Teacher extends BaseActivity<TeacherPresenter> implements ITeacher.
     private RecyclerView mRecyclerView;
     private FormBrielAdapter adapter;
     private RefreshLayout refreshLayout;
+    private TakeLeaveForm takeLeaveForm;
+    private ArrayList<FormBrief> formBriefs;
+    private Intent intent;
     @Override
     protected TeacherPresenter initPresent() {
         return new TeacherPresenter(this);
@@ -56,15 +63,24 @@ public class Teacher extends BaseActivity<TeacherPresenter> implements ITeacher.
          */
         id = navigationView.getHeaderView(0).findViewById(R.id.userId);
         name = navigationView.getHeaderView(0).findViewById(R.id.userName);
-        id.setText(getIntent().getStringExtra("userId"));
-        name.setText(getIntent().getStringExtra("userName"));
-
+        refreshLayout = (RefreshLayout)findViewById(R.id.refreshLayout);
         mRecyclerView = (RecyclerView) findViewById(R.id.main_recylist);
         /**
          * 设置线性管理器
          */
         mRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1));
         adapter = new FormBrielAdapter(presenter.setViewData());
+        adapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                intent = new Intent(Teacher.this, Form.class);
+                intent.putExtra("userInfo",((UserInfo) getIntent().getSerializableExtra("userInfo")));
+                intent.putExtra("isPut",0);
+                presenter.getTakeLeaveForm(formBriefs.get(position).getFormID());
+            }
+
+
+        });
         mRecyclerView.setAdapter(adapter);
 
         /**
@@ -143,25 +159,48 @@ public class Teacher extends BaseActivity<TeacherPresenter> implements ITeacher.
         /**
          * 页面刷新响应
          */
+        refresh();
+    }
+
+    @Override
+    public void setView(UserInfo userInfo) {
+        id.setText(userInfo.getId());
+        name.setText(userInfo.getName());
+    }
+
+    @Override
+    public void setTakeLeaveForm(TakeLeaveForm takeLeaveForm) {
+        this.takeLeaveForm = takeLeaveForm;
+    }
+
+    @Override
+    public void toFormView() {
+        intent.putExtra("takeLeaveForm",takeLeaveForm);
+        startActivity(intent);
+        //销毁本activity，并回收内存
+        IntentActivity.finishActivity(this);
+    }
+
+    @Override
+    public void fail(String msg) {
+        Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void refresh() {
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             ArrayList<FormBrief> formBriefArrayList;
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
-                /**
-                 * 进行网络请求
-                 */
+                //进行网络请求
                 formBriefArrayList = presenter.setViewData();
                 if (formBriefArrayList==null){
-                    refreshlayout.finishRefresh(2000,false);//传入false表示刷新失败
+                    refreshlayout.finishRefresh(1000,false);//传入false表示刷新失败
                     Toast.makeText(Teacher.this,"刷新失败",Toast.LENGTH_SHORT).show();
                 }else {
-                    /**
-                     * 更新adapter内部数据
-                     */
+                    //更新adapter内部数据
                     Teacher.this.adapter=new FormBrielAdapter(formBriefArrayList);
-                    /**
-                     * 刷新recycleView
-                     */
+                    //刷新recycleView
                     Teacher.this.adapter.notifyDataSetChanged();
                     Toast.makeText(Teacher.this,"刷新成功",Toast.LENGTH_SHORT).show();
                     refreshlayout.finishRefresh(1000/*,false*/);

@@ -25,6 +25,8 @@ import com.wyu.takeleave.login.Login;
 import com.wyu.takeleave.teacher.Teacher;
 import com.wyu.takeleave.util.FormBrief;
 import com.wyu.takeleave.util.FormBrielAdapter;
+import com.wyu.takeleave.util.OnItemClickListener;
+import com.wyu.takeleave.util.TakeLeaveForm;
 import com.wyu.takeleave.util.UserInfo;
 
 import java.util.ArrayList;
@@ -39,6 +41,9 @@ public class Student extends BaseActivity<StudentPresenter> implements IStudent.
     private RecyclerView mRecyclerView;
     private FormBrielAdapter adapter;
     private RefreshLayout refreshLayout;
+    private TakeLeaveForm takeLeaveForm;
+    private ArrayList<FormBrief> formBriefs;
+    private Intent intent;
 
     @Override
     protected StudentPresenter initPresent() {
@@ -64,6 +69,19 @@ public class Student extends BaseActivity<StudentPresenter> implements IStudent.
         //设置线性管理器
         mRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1));
         presenter.handleGetTakeLeave();
+        adapter.setOnItemClickListener(new OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        intent = new Intent(Student.this,Form.class);
+                        intent.putExtra("userInfo",((UserInfo) getIntent().getSerializableExtra("userInfo")));
+                        intent.putExtra("isPut",0);
+                        presenter.getTakeLeaveForm(formBriefs.get(position).getFormID());
+                    }
+
+
+                });
+        mRecyclerView.setAdapter(adapter);
+
 
         //响应侧边栏按钮
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -80,6 +98,7 @@ public class Student extends BaseActivity<StudentPresenter> implements IStudent.
                          * 跳转到表单编辑页面
                          */
                         Intent intent = new Intent(Student.this, Form.class);
+                        intent.putExtra("isPut",1);
                         intent.putExtra("userInfo", presenter.handleGetUserInfo());
                         startActivity(intent);
                         //销毁本activity，并回收内存
@@ -114,10 +133,6 @@ public class Student extends BaseActivity<StudentPresenter> implements IStudent.
     }
 
 
-    @Override
-    public void initRecycleView(ArrayList<FormBrief> formBriefs) {
-
-    }
 
     @Override
     public void setView(UserInfo userInfo) {
@@ -153,6 +168,24 @@ public class Student extends BaseActivity<StudentPresenter> implements IStudent.
 //            refreshlayout.finishRefresh(1000/*,false*/);
 //        }
 //        });
+    }
+
+    @Override
+    public void setTakeLeaveForm(TakeLeaveForm takeLeaveForm) {
+        this.takeLeaveForm = takeLeaveForm;
+    }
+
+    @Override
+    public void toFormView() {
+        intent.putExtra("takeLeaveForm",takeLeaveForm);
+        startActivity(intent);
+        //销毁本activity，并回收内存
+        IntentActivity.finishActivity(Student.this);
+    }
+
+    @Override
+    public void fail(String msg) {
+        Toast.makeText(Student.this,msg,Toast.LENGTH_SHORT).show();
     }
 
 }
