@@ -57,7 +57,8 @@ public class Teacher extends BaseActivity<TeacherPresenter> implements ITeacher.
 
     @Override
     protected void initView() {
-        presenter.handleGetTakeLeaveForms();  //开始之前，先获取到信息并set好
+        presenter.handleGetUser(((UserInfo) getIntent().getSerializableExtra("userInfo")));
+        formBriefs = new ArrayList<FormBrief>();
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         /**
@@ -70,20 +71,7 @@ public class Teacher extends BaseActivity<TeacherPresenter> implements ITeacher.
         /**
          * 设置线性管理器
          */
-        mRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1));
-        adapter = new FormBrielAdapter(formBriefs);
-        adapter.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                intent = new Intent(Teacher.this, Form.class);
-                intent.putExtra("userInfo",((UserInfo) getIntent().getSerializableExtra("userInfo")));
-                intent.putExtra("isPut",0);
-                presenter.handleGetTakeLeaveForm(formBriefs.get(position).getFormID());
-            }
-
-
-        });
-        mRecyclerView.setAdapter(adapter);
+        presenter.handleGetTakeLeaveForms();  //开始之前，先获取到信息并set好
 
         /**
          * 响应侧边栏事件
@@ -214,7 +202,21 @@ public class Teacher extends BaseActivity<TeacherPresenter> implements ITeacher.
     }
 
     @Override
-    public void setFormBriefs(ArrayList<FormBrief> formBriefs) {
-        this.formBriefs = formBriefs;
+    public void setFormBriefs(ArrayList<FormBrief> forms) {
+        mRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1));
+        this.formBriefs = forms;
+        adapter = new FormBrielAdapter(forms);
+        adapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                intent = new Intent(Teacher.this, Form.class);
+                intent.putExtra("userInfo",((UserInfo) getIntent().getSerializableExtra("userInfo")));
+                intent.putExtra("isPut",0);
+                presenter.handleGetTakeLeaveForm(formBriefs.get(position).getFormID());
+            }
+
+
+        });
+        mRecyclerView.setAdapter(adapter);
     }
 }

@@ -5,6 +5,10 @@ import java.util.List;
 public class AStudentLeaveInfo {
 
     public class Content {
+        private String auditor;
+
+        private String reply;
+
         private String college;
 
         private String major;
@@ -19,9 +23,15 @@ public class AStudentLeaveInfo {
 
         private String applyTime;
 
-        private String userId;
+        private int formId;
 
         private String classId;
+
+        private String userId;
+
+        private String beginDays;
+
+        private String deadDays;
 
         private String guardianName;
 
@@ -29,12 +39,18 @@ public class AStudentLeaveInfo {
 
         private String takeDays;
 
-        private String beginDays;
-
-        private String deadDays;
-
-        private int formId;
-
+        public void setAuditor(String auditor){
+            this.auditor = auditor;
+        }
+        public String getAuditor(){
+            return this.auditor;
+        }
+        public void setReply(String reply){
+            this.reply = reply;
+        }
+        public String getReply(){
+            return this.reply;
+        }
         public void setCollege(String college){
             this.college = college;
         }
@@ -77,17 +93,35 @@ public class AStudentLeaveInfo {
         public String getApplyTime(){
             return this.applyTime;
         }
-        public void setUserId(String userId){
-            this.userId = userId;
+        public void setFormId(int formId){
+            this.formId = formId;
         }
-        public String getUserId(){
-            return this.userId;
+        public int getFormId(){
+            return this.formId;
         }
         public void setClassId(String classId){
             this.classId = classId;
         }
         public String getClassId(){
             return this.classId;
+        }
+        public void setUserId(String userId){
+            this.userId = userId;
+        }
+        public String getUserId(){
+            return this.userId;
+        }
+        public void setBeginDays(String beginDays){
+            this.beginDays = beginDays;
+        }
+        public String getBeginDays(){
+            return this.beginDays;
+        }
+        public void setDeadDays(String deadDays){
+            this.deadDays = deadDays;
+        }
+        public String getDeadDays(){
+            return this.deadDays;
         }
         public void setGuardianName(String guardianName){
             this.guardianName = guardianName;
@@ -106,24 +140,6 @@ public class AStudentLeaveInfo {
         }
         public String getTakeDays(){
             return this.takeDays;
-        }
-        public void setBeginDays(String beginDays){
-            this.beginDays = beginDays;
-        }
-        public String getBeginDays(){
-            return this.beginDays;
-        }
-        public void setDeadDays(String deadDays){
-            this.deadDays = deadDays;
-        }
-        public String getDeadDays(){
-            return this.deadDays;
-        }
-        public void setFormId(int formId){
-            this.formId = formId;
-        }
-        public int getFormId(){
-            return this.formId;
         }
 
     }

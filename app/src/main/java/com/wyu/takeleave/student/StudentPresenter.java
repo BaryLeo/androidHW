@@ -64,10 +64,10 @@ public class StudentPresenter extends BaseActivityPresenter<Student> implements 
 
     @Override
     public void handleGetTakeLeave() {
-        model.getTakeLeaveForm(new ValueCallBack<ArrayList<FormBrief>>() {
+        model.getTakeLeaveForms(new ValueCallBack<ArrayList<FormBrief>>() {
             @Override
             public void onSuccess(ArrayList<FormBrief> formBriefs) {
-                view.setListView(formBriefs);
+                view.setFormBriefs(formBriefs);
             }
 
             @Override

@@ -54,7 +54,7 @@ public class FormBrielAdapter extends RecyclerView.Adapter<FormBrielAdapter.View
             super(view);
             time = (TextView) view.findViewById(R.id.time);
             status = (TextView) view.findViewById(R.id.status);
-            auditor = (TextView) view.findViewById(R.id.auditorName);
+            auditor = (TextView) view.findViewById(R.id.auName);
             duration = (TextView) view.findViewById(R.id.duration);
             reply = (TextView) view.findViewById(R.id.reply);
             item = (RelativeLayout) view.findViewById(R.id.applyItem);
@@ -78,10 +78,18 @@ public class FormBrielAdapter extends RecyclerView.Adapter<FormBrielAdapter.View
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         FormBrief formBrief = formBriefs.get(position);
-        holder.time.setText(formBrief.getTime().toString());
-        holder.auditor.setText(formBrief.getAuditor());
-        holder.duration.setText(formBrief.getDuration());
-        holder.reply.setText(formBrief.getReply());
+        if(formBrief.getTime() != null){
+            holder.time.setText(formBrief.getTime().toString());
+        }
+        if(formBrief.getAuditor() != null){
+            holder.auditor.setText(formBrief.getAuditor());
+        }
+        if(formBrief.getDuration() != null){
+            holder.duration.setText(formBrief.getDuration());
+        }
+        if(formBrief.getReply() != null){
+            holder.reply.setText(formBrief.getReply());
+        }
         switch (formBrief.getStatus()){
             case 0 :{
                 holder.status.setTextColor(Color.parseColor("#ff0000"));
@@ -106,6 +114,11 @@ public class FormBrielAdapter extends RecyclerView.Adapter<FormBrielAdapter.View
             case 4 :{
                 holder.status.setTextColor(Color.parseColor("#eecf7e"));
                 holder.status.setText("院长审核");
+                break;
+            }
+            case 999:{
+                holder.status.setTextColor(Color.parseColor("#eecf7e"));
+                holder.status.setText("待审核");
                 break;
             }
         }

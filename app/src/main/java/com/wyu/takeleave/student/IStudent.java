@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public interface IStudent {
     interface View{
         void setView(UserInfo userInfo);
-        void setListView(ArrayList<FormBrief> formBriefs);
+        void setFormBriefs(ArrayList<FormBrief> formBriefs);
         void refresh();
         void setTakeLeaveForm(TakeLeaveForm takeLeaveForm);
         //获取表单成功时，跳转
@@ -22,14 +22,14 @@ public interface IStudent {
     interface Presenter{
         Boolean logout();
         void handleGetUser(UserInfo userInfo);
-        void handleGetTakeLeave();
+        void handleGetTakeLeave();  //获取请假审批列表
         UserInfo handleGetUserInfo();  //P层获取用户信息
         void getTakeLeaveForm(int formID);
     }
 
     interface Model{
         void getUser(UserInfo userInfo, ValueCallBack<UserInfo> gettingDataListener);
-        void getTakeLeaveForm(ValueCallBack<ArrayList<FormBrief>> gettingTakeLeaveListener);
+        void getTakeLeaveForms(ValueCallBack<ArrayList<FormBrief>> gettingTakeLeaveListener);
         UserInfo getUserInfo();  //M层获取用户信息
     }
 }

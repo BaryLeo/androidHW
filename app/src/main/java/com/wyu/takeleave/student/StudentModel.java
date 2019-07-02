@@ -59,7 +59,7 @@ public class StudentModel implements IStudent.Model{
     }
 
     @Override
-    public void getTakeLeaveForm(ValueCallBack<ArrayList<FormBrief>> gettingTakeLeaveListener) {
+    public void getTakeLeaveForms(ValueCallBack<ArrayList<FormBrief>> gettingTakeLeaveListener) {
         try{
             OkHttpUtils
                     .post()
@@ -78,10 +78,14 @@ public class StudentModel implements IStudent.Model{
                                 ArrayList<FormBrief> formBriefs = new ArrayList<FormBrief>();
                                 for(int i = 0; i < info.getContent().size(); i++){
                                     FormBrief data = new FormBrief();
-                                    //data.setAuditor();
+                                    data.setAuditor(info.getContent().get(i).getAuditor());
                                     data.setDuration(info.getContent().get(i).getTakeDays());
-                                    //data.setReply();
-                                    //data.setStatus();
+                                    data.setReply(info.getContent().get(i).getReply());
+                                    if(info.getContent().get(i).getInstructor_permit() != null){
+                                        data.setStatus(Integer.valueOf(info.getContent().get(i).getInstructor_permit()));  //已有审核状态
+                                    }else{
+                                        data.setStatus(999);  //未审核状态
+                                    }
                                     data.setTime(info.getContent().get(i).getApplyTime());
                                     formBriefs.add(data);
                                 }

@@ -58,6 +58,7 @@ public class Student extends BaseActivity<StudentPresenter> implements IStudent.
     @Override
     protected void initView() {
         presenter.handleGetUser(((UserInfo) getIntent().getSerializableExtra("userInfo")));
+        formBriefs = new ArrayList<FormBrief>();
         navigationView = (NavigationView) findViewById(R.id.nav_view);
 
         //通过侧边栏组件，才能操作侧边栏里面的组件
@@ -67,22 +68,8 @@ public class Student extends BaseActivity<StudentPresenter> implements IStudent.
 
         mRecyclerView = (RecyclerView) findViewById(R.id.main_recylist);
         //设置线性管理器
-        mRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1));
+
         presenter.handleGetTakeLeave();
-        adapter.setOnItemClickListener(new OnItemClickListener() {
-                    @Override
-                    public void onItemClick(View view, int position) {
-                        intent = new Intent(Student.this,Form.class);
-                        intent.putExtra("userInfo",((UserInfo) getIntent().getSerializableExtra("userInfo")));
-                        intent.putExtra("isPut",0);
-                        presenter.getTakeLeaveForm(formBriefs.get(position).getFormID());
-                    }
-
-
-                });
-        mRecyclerView.setAdapter(adapter);
-
-
         //响应侧边栏按钮
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -141,8 +128,22 @@ public class Student extends BaseActivity<StudentPresenter> implements IStudent.
     }
 
     @Override
-    public void setListView(ArrayList<FormBrief> formBriefs){
-        adapter = new FormBrielAdapter(formBriefs);
+    public void setFormBriefs(ArrayList<FormBrief> forms){
+        mRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1));
+        this.formBriefs = forms;
+        adapter = new FormBrielAdapter(forms);
+        mRecyclerView.setAdapter(adapter);
+        adapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                intent = new Intent(Student.this,Form.class);
+                intent.putExtra("userInfo",((UserInfo) getIntent().getSerializableExtra("userInfo")));
+                intent.putExtra("isPut",0);
+                presenter.getTakeLeaveForm(formBriefs.get(position).getFormID());
+            }
+
+
+        });
         mRecyclerView.setAdapter(adapter);
     }
 
