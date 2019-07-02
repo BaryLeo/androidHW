@@ -6,11 +6,11 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/allApply"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@mipmap/date"
             android:title="所有申请" />
         <item
             android:id="@+id/noCheckApply"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@mipmap/action"
             android:title="请假申请" />
     </group>
 
@@ -18,7 +18,7 @@
         <menu>
             <item
                 android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
+                android:icon="@mipmap/logout"
                 android:title="注销登录" />
         </menu>
     </item>

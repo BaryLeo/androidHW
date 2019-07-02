@@ -18,6 +18,7 @@ public class TeacherModel implements ITeacher.Model{
     private final String GETUSER = "http://appcat.site/api/getUser";
     private final String GETFORM = "http://appcat.site/api/teacher/teacherGetTakeLeave";
     private UserInfo localUserInfo = new UserInfo();
+    private ATeacherLeaveForm localForm;
 
     @Override
     public void getUser(UserInfo userInfo, ValueCallBack<UserInfo> gettingDataListener) {
@@ -53,6 +54,25 @@ public class TeacherModel implements ITeacher.Model{
     @Override
     public TakeLeaveForm getTakeLeaveForm(int formId) {
         //TODO:在拿到整个列表后，存下来，然后通过formId去本地检索并返回这个form
+        TakeLeaveForm data = new TakeLeaveForm();
+        for(int i = 0; i < localForm.getContent().size(); i++){
+            ATeacherLeaveForm form = localForm;
+            if(form.getContent().get(i).getFormId() == formId){
+                data.setGuardian_tel(form.getContent().get(i).getGuardianTel());
+                data.setGuardian_name(form.getContent().get(i).getUsername());
+                data.setStudent_tel(form.getContent().get(i).getStudent_tel());
+                data.setMajor(form.getContent().get(i).getMajor());
+                data.setClass_id(form.getContent().get(i).getClassId());
+                data.setCollege(form.getContent().get(i).getCollege());
+                data.setUser_id(form.getContent().get(i).getUserId());
+                data.setUsername(form.getContent().get(i).getUsername());
+                data.setTake_days(form.getContent().get(i).getTakeDays());
+                data.setDead_days(form.getContent().get(i).getDeadDays());
+                data.setBegin_days(form.getContent().get(i).getBeginDays());
+                data.setReason(form.getContent().get(i).getReason());
+            }
+            return data;
+        }
         return null;
     }
 
@@ -73,12 +93,14 @@ public class TeacherModel implements ITeacher.Model{
                         public void onResponse(String response, int id) {
                             if(!response.equals("")){
                                 ATeacherLeaveForm info = (ATeacherLeaveForm) MyOkHttpUtils.parseJSONWithGSON(response, ATeacherLeaveForm.class);
+                                localForm = info;
                                 ArrayList<FormBrief> formBriefs = new ArrayList<FormBrief>();
                                 for(int i = 0; i < info.getContent().size(); i++){
                                     FormBrief data = new FormBrief();
                                     data.setAuditor(info.getContent().get(i).getAuditor());
                                     data.setDuration(info.getContent().get(i).getTakeDays());
                                     data.setReply(info.getContent().get(i).getReply());
+                                    data.setFormID(info.getContent().get(i).getFormId());
                                     if(info.getContent().get(i).getInstructor_permit() != null){
                                         data.setStatus(Integer.valueOf(info.getContent().get(i).getInstructor_permit()));  //已有审核状态
                                     }else{

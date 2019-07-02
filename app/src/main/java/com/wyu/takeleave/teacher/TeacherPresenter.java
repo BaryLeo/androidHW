@@ -47,6 +47,8 @@ public class TeacherPresenter extends BaseActivityPresenter<Teacher> implements 
     public void handleGetTakeLeaveForm(int formId) {
         //调用这个view.setTakeLeaveForm();
         view.setTakeLeaveForm(model.getTakeLeaveForm(formId));
+        //当获取成功时
+        view.toFormView();
     }
 
     @Override

@@ -46,20 +46,7 @@ public class StudentPresenter extends BaseActivityPresenter<Student> implements 
     @Override
     public void getTakeLeaveForm(int formID) {
         //调用view.setTakeLeaveForm();
-        TakeLeaveForm takeLeaveForm = new TakeLeaveForm();
-        takeLeaveForm.setGuardian_tel("1");
-        takeLeaveForm.setGuardian_name("1");
-        takeLeaveForm.setStudent_tel("1");
-        takeLeaveForm.setMajor("1");
-        takeLeaveForm.setClass_id("1");
-        takeLeaveForm.setCollege("1");
-        takeLeaveForm.setUser_id("1");
-        takeLeaveForm.setUsername("1");
-        takeLeaveForm.setTake_days("1");
-        takeLeaveForm.setDead_days("1");
-        takeLeaveForm.setBegin_days("1");
-        takeLeaveForm.setReason("1");
-        view.setTakeLeaveForm(takeLeaveForm);
+        view.setTakeLeaveForm(model.getTakeLeaveForm(formID));
         //当获取成功时
         view.toFormView();
     }

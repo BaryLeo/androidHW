@@ -3,6 +3,7 @@ package com.wyu.takeleave.student;
 import com.wyu.takeleave.ValueCallBack;
 import com.wyu.takeleave.util.FormBrief;
 import com.wyu.takeleave.util.MyOkHttpUtils;
+import com.wyu.takeleave.util.TakeLeaveForm;
 import com.wyu.takeleave.util.UserInfo;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -19,6 +20,7 @@ public class StudentModel implements IStudent.Model{
     private final String GETUSER = "http://appcat.site/api/getUser";
     private final String GETFORM = "http://appcat.site/api/student/getTakeLeaveForm";
     private UserInfo localUserInfo = new UserInfo();
+    private AStudentLeaveInfo localForm;
 
     @Override
     public UserInfo getUserInfo() {
@@ -59,6 +61,30 @@ public class StudentModel implements IStudent.Model{
     }
 
     @Override
+    public TakeLeaveForm getTakeLeaveForm(int formId) {
+        TakeLeaveForm data = new TakeLeaveForm();
+        for(int i = 0; i < localForm.getContent().size(); i++){
+            AStudentLeaveInfo form = localForm;
+            if(form.getContent().get(i).getFormId() == formId){
+                data.setGuardian_tel(form.getContent().get(i).getGuardianTel());
+                data.setGuardian_name(form.getContent().get(i).getUsername());
+                data.setStudent_tel(form.getContent().get(i).getStudent_tel());
+                data.setMajor(form.getContent().get(i).getMajor());
+                data.setClass_id(form.getContent().get(i).getClassId());
+                data.setCollege(form.getContent().get(i).getCollege());
+                data.setUser_id(form.getContent().get(i).getUserId());
+                data.setUsername(form.getContent().get(i).getUsername());
+                data.setTake_days(form.getContent().get(i).getTakeDays());
+                data.setDead_days(form.getContent().get(i).getDeadDays());
+                data.setBegin_days(form.getContent().get(i).getBeginDays());
+                data.setReason(form.getContent().get(i).getReason());
+            }
+            return data;
+        }
+        return null;
+    }
+
+    @Override
     public void getTakeLeaveForms(ValueCallBack<ArrayList<FormBrief>> gettingTakeLeaveListener) {
         try{
             OkHttpUtils
@@ -75,12 +101,14 @@ public class StudentModel implements IStudent.Model{
                         public void onResponse(String response, int id) {
                             if(!response.equals("")){
                                 AStudentLeaveInfo info = (AStudentLeaveInfo) MyOkHttpUtils.parseJSONWithGSON(response, AStudentLeaveInfo.class);
+                                localForm = info;
                                 ArrayList<FormBrief> formBriefs = new ArrayList<FormBrief>();
                                 for(int i = 0; i < info.getContent().size(); i++){
                                     FormBrief data = new FormBrief();
                                     data.setAuditor(info.getContent().get(i).getAuditor());
                                     data.setDuration(info.getContent().get(i).getTakeDays());
                                     data.setReply(info.getContent().get(i).getReply());
+                                    data.setFormID(info.getContent().get(i).getFormId());
                                     if(info.getContent().get(i).getInstructor_permit() != null){
                                         data.setStatus(Integer.valueOf(info.getContent().get(i).getInstructor_permit()));  //已有审核状态
                                     }else{

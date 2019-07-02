@@ -121,7 +121,7 @@ public class Form extends BaseActivity<FormPresenter> implements IForm.View{
                     @Override
                     public void onClick(View v) {
                         takeLeaveForm.setInstructor_permit((byte)1);
-                        presenter.auditingForm(takeLeaveForm);
+                        presenter.handleAuditingForm(takeLeaveForm);
                     }
                 });
                 button2.setText("拒绝");
@@ -129,7 +129,7 @@ public class Form extends BaseActivity<FormPresenter> implements IForm.View{
                     @Override
                     public void onClick(View v) {
                         takeLeaveForm.setInstructor_permit((byte)0);
-                        presenter.auditingForm(takeLeaveForm);
+                        presenter.handleAuditingForm(takeLeaveForm);
                     }
                 });
             }
@@ -139,7 +139,7 @@ public class Form extends BaseActivity<FormPresenter> implements IForm.View{
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        presenter.cancelApply(takeLeaveForm);
+                        presenter.handleCancelApply(takeLeaveForm);
                     }
                 });
             }

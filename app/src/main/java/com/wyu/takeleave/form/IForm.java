@@ -14,11 +14,13 @@ public interface IForm {
 
     interface Presenter{
         void handlePutTakeLeaveForm(TakeLeaveForm takeLeaveForm);
-        void auditingForm(TakeLeaveForm takeLeaveForm);
-        void cancelApply(TakeLeaveForm takeLeaveForm);
+        void handleAuditingForm(TakeLeaveForm takeLeaveForm);
+        void handleCancelApply(TakeLeaveForm takeLeaveForm);
     }
 
     interface Model{
         void putTakeLeaveForm(TakeLeaveForm takeLeaveForm, ValueCallBack<String> putTakeLeaveListener);
+        void auditingForm(TakeLeaveForm takeLeaveForm, ValueCallBack<String> auditingListener);
+        void cancelApply(TakeLeaveForm takeLeaveForm, ValueCallBack<String> cancelApplyListener);
     }
 }

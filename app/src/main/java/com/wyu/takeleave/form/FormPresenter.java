@@ -40,13 +40,13 @@ public class FormPresenter extends BaseActivityPresenter<Form> implements IForm.
     }
 
     @Override
-    public void auditingForm(TakeLeaveForm takeLeaveForm) {
+    public void handleAuditingForm(TakeLeaveForm takeLeaveForm) {
         //表单审核
 
     }
 
     @Override
-    public void cancelApply(TakeLeaveForm takeLeaveForm) {
+    public void handleCancelApply(TakeLeaveForm takeLeaveForm) {
         //取消表单申请
     }
 }

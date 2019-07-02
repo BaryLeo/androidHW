@@ -29,6 +29,7 @@ public interface IStudent {
 
     interface Model{
         void getUser(UserInfo userInfo, ValueCallBack<UserInfo> gettingDataListener);
+        TakeLeaveForm getTakeLeaveForm(int formId);
         void getTakeLeaveForms(ValueCallBack<ArrayList<FormBrief>> gettingTakeLeaveListener);
         UserInfo getUserInfo();  //M层获取用户信息
     }

@@ -14,6 +14,8 @@ import okhttp3.MediaType;
 public class FormModel implements IForm.Model{
 
     private final String PUTLEAVE = "http://appcat.site/api/student/putTakeLeave";
+    private final String AUDITINGLEAVE = "http://appcat.site/api/teacher/auditingSingleTakeLeaves";
+    private final String CANCLELEAVE = "http://appcat.site/api/student/cancelTakeLeaveApply";
 
     @Override
     public void putTakeLeaveForm(TakeLeaveForm takeLeaveForm, ValueCallBack<String> putTakeLeaveListener) {
@@ -50,6 +52,59 @@ public class FormModel implements IForm.Model{
                             putTakeLeaveListener.onSuccess(info.getContent());
                         }
                     });
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void auditingForm(TakeLeaveForm takeLeaveForm, ValueCallBack<String> auditingListener) {
+        try{
+            OkHttpUtils
+                    .post()
+                    .addParams("formIds", takeLeaveForm.getForm_id().toString())
+                    .addParams("isPermit", takeLeaveForm.getInstructor_permit().toString())
+                    .addParams("reply", "123")  //TODO:改成reply
+                    .build()
+                    .execute(new StringCallback() {
+                        @Override
+                        public void onError(Call call, Exception e, int id) {
+                            e.printStackTrace();
+                            auditingListener.onFail(e.toString());
+                        }
+
+                        @Override
+                        public void onResponse(String response, int id) {
+                            AAuditing info = (AAuditing)MyOkHttpUtils.parseJSONWithGSON(response, AAuditing.class);
+                            auditingListener.onSuccess(info.getContent());
+                        }
+                    });
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void cancelApply(TakeLeaveForm takeLeaveForm, ValueCallBack<String> cancelApplyListener) {
+        try{
+            OkHttpUtils
+                    .post()
+                    .addParams("fromId", takeLeaveForm.getForm_id().toString())  //TODO:后端设了fromId这个键值
+                    .build()
+                    .execute(new StringCallback() {
+                        @Override
+                        public void onError(Call call, Exception e, int id) {
+                            e.printStackTrace();
+                            cancelApplyListener.onFail(e.toString());
+                        }
+
+                        @Override
+                        public void onResponse(String response, int id) {
+                            ACancel info = (ACancel)MyOkHttpUtils.parseJSONWithGSON(response, ACancel.class);
+                            cancelApplyListener.onSuccess(info.getContent());
+                        }
+                    });
+
         }catch (Exception e){
             e.printStackTrace();
         }

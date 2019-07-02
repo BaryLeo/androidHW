@@ -150,7 +150,7 @@ public class Student extends BaseActivity<StudentPresenter> implements IStudent.
             @Override
             public void onItemClick(View view, int position) {
                 intent = new Intent(Student.this,Form.class);
-                intent.putExtra("userInfo",((UserInfo) getIntent().getSerializableExtra("userInfo")));
+                intent.putExtra("userInfo", presenter.handleGetUserInfo());
                 formBrief=formBriefs.get(position);
                 formBrief.setIsPut(0);
                 intent.putExtra("isPut",formBrief);
