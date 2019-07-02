@@ -17,6 +17,7 @@ import com.wyu.takeleave.ValueCallBack;
 import com.wyu.takeleave.login.Login;
 import com.wyu.takeleave.student.Student;
 import com.wyu.takeleave.teacher.Teacher;
+import com.wyu.takeleave.util.FormBrief;
 import com.wyu.takeleave.util.TakeLeaveForm;
 import com.wyu.takeleave.util.UserInfo;
 
@@ -83,7 +84,8 @@ public class Form extends BaseActivity<FormPresenter> implements IForm.View{
         //获取用户信息，实现单活动多用
         userInfo = ((UserInfo) getIntent().getSerializableExtra("userInfo"));
         int flag = 1;
-        getIntent().getIntExtra("isPut",flag);
+        FormBrief formBrief = ((FormBrief) getIntent().getSerializableExtra("isPut"));
+        flag = formBrief.getIsPut();
 
         if (flag==0){
             tel.setEnabled(false);

@@ -13,12 +13,21 @@ public class FormBrief implements Serializable {
     private String duration;
     private String reply;
     private int formID;
+    private int isPut;
 
     public FormBrief(){
         status = 2;
         auditor ="暂无审核者信息";
         duration = "获取失败";
         reply = "无";
+    }
+
+    public int getIsPut() {
+        return isPut;
+    }
+
+    public void setIsPut(int isPut) {
+        this.isPut = isPut;
     }
 
     public int getFormID() {
