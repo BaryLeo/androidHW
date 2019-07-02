@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.wyu.takeleave.BaseActivity;
 import com.wyu.takeleave.IntentActivity;
 import com.wyu.takeleave.R;
+import com.wyu.takeleave.ValueCallBack;
 import com.wyu.takeleave.login.Login;
 import com.wyu.takeleave.student.Student;
 import com.wyu.takeleave.teacher.Teacher;
@@ -42,6 +43,7 @@ public class Form extends BaseActivity<FormPresenter> implements IForm.View{
     private EditText reason;
     private TakeLeaveForm takeLeaveForm;
 
+    private UserInfo userInfo;
     @Override
     protected FormPresenter initPresent() {
         return new FormPresenter(this);
@@ -79,15 +81,41 @@ public class Form extends BaseActivity<FormPresenter> implements IForm.View{
         reason = (EditText)findViewById(R.id.reson);
         button.setText("提交申请");
         //获取用户信息，实现单活动多用
-        UserInfo userInfo = ((UserInfo) getIntent().getSerializableExtra("userInfo"));
-//        if ("老师".equals(userInfo.getUserType())||"辅导员".equals(userInfo.getUserType())){
-//            button.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//
-//                }
-//            });
-//        }
+        userInfo = ((UserInfo) getIntent().getSerializableExtra("userInfo"));
+        if ("老师".equals(userInfo.getUserType())||"辅导员".equals(userInfo.getUserType())){
+            tel.setEnabled(false);
+            guaarder.setEnabled(false);
+            guaarderTel.setEnabled(false);
+            beginTime.setEnabled(false);
+            deadTime.setEnabled(false);
+            reason.setEnabled(false);
+            button.setText("同意");
+
+            takeLeaveForm =((TakeLeaveForm) getIntent().getSerializableExtra("takeLeaveForm"));
+            if (takeLeaveForm==null){
+
+            }else {
+                name.setText(takeLeaveForm.getUsername());
+                id.setText(takeLeaveForm.getUser_id());
+                college.setText(takeLeaveForm.getCollege());
+                major.setText(takeLeaveForm.getMajor());
+                classId.setText(takeLeaveForm.getClass_id());
+                tel.setText(takeLeaveForm.getStudent_tel());
+                guaarder.setText(takeLeaveForm.getGuardian_name());
+                guaarderTel.setText(takeLeaveForm.getGuardian_tel());
+                beginTime.setText(takeLeaveForm.getBegin_days());
+                deadTime.setText(takeLeaveForm.getDead_days());
+                days.setText(takeLeaveForm.getTake_days());
+                reason.setText(takeLeaveForm.getReason());
+            }
+
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
+        }
 
         if ("学生".equals(userInfo.getUserType())||"班级管理员".equals(userInfo.getUserType())){
             name.setText(userInfo.getName());
@@ -170,6 +198,7 @@ public class Form extends BaseActivity<FormPresenter> implements IForm.View{
                     check.add(deadTime.getText().toString().trim());
                     check.add(beginTime.getText().toString().trim());
                     check.add(reason.getText().toString().trim());
+
                     Boolean isFull = false;
                     for (String str:check){
                         if (!str.equals("")){
@@ -180,29 +209,43 @@ public class Form extends BaseActivity<FormPresenter> implements IForm.View{
                             break;
                         }
                     }
-
                     if (isFull){
-                        if (presenter.setTakeLeaveForm(takeLeaveForm)){
-                            Intent intent = new Intent(Form.this,Student.class);
-                            intent.putExtra("userInfo",userInfo);
-                            startActivity(intent);
-                            //销毁本activity，并回收内存
-                            IntentActivity.finishActivity(Form.this);
-                        }
+                        presenter.putTakeLeaveForm(takeLeaveForm);
                     }
-
 
                 }
             });
         }
-
-
-        //UserInfo userInfo =presenter.getUserInfo();
 
     }
 
     @Override
     protected void onPrepare() {
 
+    }
+
+
+    @Override
+    public void handleApplySuccess() {
+        if ("学生".equals(userInfo.getUserType())||"班级管理员".equals(userInfo.getUserType())){
+            Intent intent = new Intent(Form.this,Student.class);
+            intent.putExtra("userInfo",userInfo);
+            startActivity(intent);
+            //销毁本activity，并回收内存
+            IntentActivity.finishActivity(Form.this);
+        }
+
+        if ("老师".equals(userInfo.getUserType())||"辅导员".equals(userInfo.getUserType())){
+            Intent intent = new Intent(Form.this,Teacher.class);
+            intent.putExtra("userInfo",userInfo);
+            startActivity(intent);
+            //销毁本activity，并回收内存
+            IntentActivity.finishActivity(Form.this);
+        }
+    }
+
+    @Override
+    public void handleApplyFail(String msg) {
+        Toast.makeText(Form.this,msg,Toast.LENGTH_SHORT).show();
     }
 }
