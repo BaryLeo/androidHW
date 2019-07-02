@@ -341,6 +341,35 @@
                     android:layout_marginRight="20dp"/>
             </RelativeLayout>
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:layout_marginTop="1dp">
+
+                <TextView
+                    android:id="@+id/replyTitle"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginTop="15dp"
+                    android:text="审核留言"
+                    android:textSize="16sp"
+                    android:layout_marginLeft="5dp"/>
+                <EditText
+                    android:id="@+id/reply"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/replyTitle"
+                    android:background="@color/white"
+                    android:hint="请输入留言"
+                    android:textSize="16sp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"/>
+            </RelativeLayout>
+
             <Button
                 android:id="@+id/button"
                 android:layout_width="match_parent"

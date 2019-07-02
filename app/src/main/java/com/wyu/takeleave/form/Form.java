@@ -36,6 +36,7 @@ public class Form extends BaseActivity<FormPresenter> implements IForm.View{
     private EditText tel;
     private EditText guaarder;
     private EditText guaarderTel;
+    private EditText reply;
 
     private Button button;
     private Button button2;
@@ -82,6 +83,7 @@ public class Form extends BaseActivity<FormPresenter> implements IForm.View{
         days = (EditText)findViewById(R.id.days);
         days.setEnabled(false);
         reason = (EditText)findViewById(R.id.reson);
+        reply = (EditText)findViewById(R.id.reply);
         button.setText("提交申请");
         //获取用户信息，实现单活动多用
         userInfo = ((UserInfo) getIntent().getSerializableExtra("userInfo"));
@@ -120,6 +122,8 @@ public class Form extends BaseActivity<FormPresenter> implements IForm.View{
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+
+                        takeLeaveForm.setReply(reply.getText().toString());
                         takeLeaveForm.setInstructor_permit((byte)1);
                         presenter.auditingForm(takeLeaveForm);
                     }
@@ -128,6 +132,7 @@ public class Form extends BaseActivity<FormPresenter> implements IForm.View{
                 button2.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        takeLeaveForm.setReply(reply.getText().toString());
                         takeLeaveForm.setInstructor_permit((byte)0);
                         presenter.auditingForm(takeLeaveForm);
                     }
@@ -135,6 +140,7 @@ public class Form extends BaseActivity<FormPresenter> implements IForm.View{
             }
             if ("学生".equals(userInfo.getUserType())||"班级管理员".equals(userInfo.getUserType())){
                 button2.setVisibility(View.GONE);
+                reply.setVisibility(View.GONE);
                 button.setText("取消申请");
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -153,6 +159,7 @@ public class Form extends BaseActivity<FormPresenter> implements IForm.View{
                 major.setText(userInfo.getMajor());
                 classId.setText(userInfo.getClassId());
                 button2.setVisibility(View.GONE);
+                reply.setVisibility(View.GONE);
 
                 beginTime.setInputType(InputType.TYPE_NULL);
                 beginTime.setOnClickListener(new View.OnClickListener() {
