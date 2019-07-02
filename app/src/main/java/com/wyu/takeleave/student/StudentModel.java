@@ -7,6 +7,7 @@ import com.wyu.takeleave.util.UserInfo;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -231,7 +232,13 @@ public class StudentModel implements IStudent.Model{
                                     data.setDuration(info.getContent().get(i).getTakeDays());
                                     //data.setReply();
                                     //data.setStatus();
-                                    data.setTime(new Date(info.getContent().get(i).getApplyTime()));
+                                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                                    try {
+                                        Date date = simpleDateFormat.parse(info.getContent().get(i).getApplyTime());
+                                        data.setTime(date);
+                                    }catch (Exception e){
+                                        e.printStackTrace();
+                                    }
                                     formBriefs.add(data);
                                 }
                                 gettingTakeLeaveListener.onSuccess(formBriefs);
