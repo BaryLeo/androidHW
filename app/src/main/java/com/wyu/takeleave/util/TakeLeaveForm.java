@@ -6,7 +6,8 @@ import java.util.Date;
 //表单实体
 public class TakeLeaveForm implements Serializable {
     private Integer form_id;
-
+    private String auditor;
+    private String reply;
     private String user_id;
 
     private String class_id;
@@ -34,6 +35,22 @@ public class TakeLeaveForm implements Serializable {
     private String username;
 
     private Date applyTime;
+
+    public String getAuditor() {
+        return auditor;
+    }
+
+    public void setAuditor(String auditor) {
+        this.auditor = auditor;
+    }
+
+    public String getReply() {
+        return reply;
+    }
+
+    public void setReply(String reply) {
+        this.reply = reply;
+    }
 
     public Integer getForm_id() {
         return form_id;
