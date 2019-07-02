@@ -43,6 +43,8 @@ public class Teacher extends BaseActivity<TeacherPresenter> implements ITeacher.
     private TakeLeaveForm takeLeaveForm;
     private ArrayList<FormBrief> formBriefs;
     private Intent intent;
+    private FormBrief formBrief;
+
     @Override
     protected TeacherPresenter initPresent() {
         return new TeacherPresenter(this);
@@ -75,7 +77,9 @@ public class Teacher extends BaseActivity<TeacherPresenter> implements ITeacher.
             public void onItemClick(View view, int position) {
                 intent = new Intent(Teacher.this, Form.class);
                 intent.putExtra("userInfo",((UserInfo) getIntent().getSerializableExtra("userInfo")));
-                intent.putExtra("isPut",0);
+                formBrief=formBriefs.get(position);
+                formBrief.setIsPut(0);
+                intent.putExtra("isPut",formBrief);
                 presenter.getTakeLeaveForm(formBriefs.get(position).getFormID());
             }
 
