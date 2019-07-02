@@ -45,6 +45,7 @@ public class Student extends BaseActivity<StudentPresenter> implements IStudent.
     private ArrayList<FormBrief> formBriefs;
     private Intent intent;
     private FormBrief formBrief;
+    private Toolbar toolbar;
 
     @Override
     protected StudentPresenter initPresent() {
@@ -58,9 +59,19 @@ public class Student extends BaseActivity<StudentPresenter> implements IStudent.
 
     @Override
     protected void initView() {
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+
         formBriefs = presenter.setViewData();
         presenter.handleGetUser(((UserInfo) getIntent().getSerializableExtra("userInfo")));
-        navigationView = (NavigationView) findViewById(R.id.nav_view);
+
 
         //通过侧边栏组件，才能操作侧边栏里面的组件
         id = navigationView.getHeaderView(0).findViewById(R.id.userId);

@@ -6,15 +6,48 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <include layout="@layout/toolbar"
-        android:layout_height="60dp"
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/toolbarlayout"
         android:layout_width="match_parent"
-        android:id="@+id/toolbar"/>
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme"
+            app:contentInsetLeft="0dp"
+            app:contentInsetStart="0dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <!--<ImageView-->
+                <!--android:layout_width="24dp"-->
+                <!--android:layout_height="24dp"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:id="@+id/toolbarBack"/>-->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="20dp"
+                    android:textSize="20sp"
+                    android:text="请假小助手"
+                    android:id="@+id/toolbarText"/>
+
+            </RelativeLayout>
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
 
 
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_below="@id/toolbar"
+        android:layout_below="@id/toolbarlayout"
         android:id="@+id/refreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -5,9 +5,11 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -44,6 +46,7 @@ public class Teacher extends BaseActivity<TeacherPresenter> implements ITeacher.
     private ArrayList<FormBrief> formBriefs;
     private Intent intent;
     private FormBrief formBrief;
+    private Toolbar toolbar;
 
     @Override
     protected TeacherPresenter initPresent() {
@@ -59,7 +62,14 @@ public class Teacher extends BaseActivity<TeacherPresenter> implements ITeacher.
 
     @Override
     protected void initView() {
-        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        NavigationView navigationView = (NavigationView)findViewById(R.id.nav_view);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
         /**
          * 通过侧边栏组件，才能操作侧边栏里面的组件
          */
