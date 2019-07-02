@@ -17,6 +17,7 @@ import com.wyu.takeleave.ValueCallBack;
 import com.wyu.takeleave.login.Login;
 import com.wyu.takeleave.student.Student;
 import com.wyu.takeleave.teacher.Teacher;
+import com.wyu.takeleave.util.FormBrief;
 import com.wyu.takeleave.util.TakeLeaveForm;
 import com.wyu.takeleave.util.UserInfo;
 
@@ -37,6 +38,7 @@ public class Form extends BaseActivity<FormPresenter> implements IForm.View{
     private EditText guaarderTel;
 
     private Button button;
+    private Button button2;
     private EditText beginTime;
     private EditText deadTime;
     private EditText days;
@@ -74,6 +76,7 @@ public class Form extends BaseActivity<FormPresenter> implements IForm.View{
         guaarderTel = (EditText)findViewById(R.id.guaarderTel);
 
         button =(Button)findViewById(R.id.button);
+        button2 = (Button)findViewById(R.id.button2);
         beginTime = (EditText)findViewById(R.id.beginTime);
         deadTime = (EditText)findViewById(R.id.deadTime);
         days = (EditText)findViewById(R.id.days);
@@ -83,7 +86,8 @@ public class Form extends BaseActivity<FormPresenter> implements IForm.View{
         //获取用户信息，实现单活动多用
         userInfo = ((UserInfo) getIntent().getSerializableExtra("userInfo"));
         int flag = 1;
-        getIntent().getIntExtra("isPut",flag);
+        FormBrief formBrief = ((FormBrief) getIntent().getSerializableExtra("isPut"));
+        flag = formBrief.getIsPut();
 
         if (flag==0){
             tel.setEnabled(false);
@@ -116,11 +120,21 @@ public class Form extends BaseActivity<FormPresenter> implements IForm.View{
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        takeLeaveForm.setInstructor_permit((byte)1);
+                        presenter.auditingForm(takeLeaveForm);
+                    }
+                });
+                button2.setText("拒绝");
+                button2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        takeLeaveForm.setInstructor_permit((byte)0);
                         presenter.auditingForm(takeLeaveForm);
                     }
                 });
             }
             if ("学生".equals(userInfo.getUserType())||"班级管理员".equals(userInfo.getUserType())){
+                button2.setVisibility(View.GONE);
                 button.setText("取消申请");
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -138,6 +152,7 @@ public class Form extends BaseActivity<FormPresenter> implements IForm.View{
                 college.setText(userInfo.getCollege());
                 major.setText(userInfo.getMajor());
                 classId.setText(userInfo.getClassId());
+                button2.setVisibility(View.GONE);
 
                 beginTime.setInputType(InputType.TYPE_NULL);
                 beginTime.setOnClickListener(new View.OnClickListener() {

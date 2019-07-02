@@ -60,6 +60,8 @@ public class StudentPresenter extends BaseActivityPresenter<Student> implements 
         takeLeaveForm.setBegin_days("1");
         takeLeaveForm.setReason("1");
         view.setTakeLeaveForm(takeLeaveForm);
+        //当获取成功时
+        view.toFormView();
     }
 
     @Override

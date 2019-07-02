@@ -44,6 +44,8 @@ public class Student extends BaseActivity<StudentPresenter> implements IStudent.
     private TakeLeaveForm takeLeaveForm;
     private ArrayList<FormBrief> formBriefs;
     private Intent intent;
+    private FormBrief formBrief;
+    private Toolbar toolbar;
 
     @Override
     protected StudentPresenter initPresent() {
@@ -57,6 +59,15 @@ public class Student extends BaseActivity<StudentPresenter> implements IStudent.
 
     @Override
     protected void initView() {
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
         presenter.handleGetUser(((UserInfo) getIntent().getSerializableExtra("userInfo")));
         formBriefs = new ArrayList<FormBrief>();
         navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -85,7 +96,9 @@ public class Student extends BaseActivity<StudentPresenter> implements IStudent.
                          * 跳转到表单编辑页面
                          */
                         Intent intent = new Intent(Student.this, Form.class);
-                        intent.putExtra("isPut",1);
+                        formBrief = new FormBrief();
+                        formBrief.setIsPut(1);
+                        intent.putExtra("isPut",formBrief);
                         intent.putExtra("userInfo", presenter.handleGetUserInfo());
                         startActivity(intent);
                         //销毁本activity，并回收内存
@@ -138,8 +151,10 @@ public class Student extends BaseActivity<StudentPresenter> implements IStudent.
             public void onItemClick(View view, int position) {
                 intent = new Intent(Student.this,Form.class);
                 intent.putExtra("userInfo",((UserInfo) getIntent().getSerializableExtra("userInfo")));
-                intent.putExtra("isPut",0);
-                presenter.getTakeLeaveForm(formBriefs.get(position).getFormID());
+                formBrief=formBriefs.get(position);
+                formBrief.setIsPut(0);
+                intent.putExtra("isPut",formBrief);
+                presenter.getTakeLeaveForm(formBrief.getFormID());
             }
 
 

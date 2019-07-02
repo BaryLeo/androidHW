@@ -5,9 +5,11 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -43,6 +45,9 @@ public class Teacher extends BaseActivity<TeacherPresenter> implements ITeacher.
     private TakeLeaveForm takeLeaveForm;
     private ArrayList<FormBrief> formBriefs;
     private Intent intent;
+    private FormBrief formBrief;
+    private Toolbar toolbar;
+
     @Override
     protected TeacherPresenter initPresent() {
         return new TeacherPresenter(this);
@@ -57,10 +62,18 @@ public class Teacher extends BaseActivity<TeacherPresenter> implements ITeacher.
 
     @Override
     protected void initView() {
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        NavigationView navigationView = (NavigationView)findViewById(R.id.nav_view);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
         presenter.handleGetUser(((UserInfo) getIntent().getSerializableExtra("userInfo")));
         formBriefs = new ArrayList<FormBrief>();
 
-        navigationView = (NavigationView) findViewById(R.id.nav_view);
         /**
          * 通过侧边栏组件，才能操作侧边栏里面的组件
          */
@@ -210,12 +223,12 @@ public class Teacher extends BaseActivity<TeacherPresenter> implements ITeacher.
             @Override
             public void onItemClick(View view, int position) {
                 intent = new Intent(Teacher.this, Form.class);
-                intent.putExtra("userInfo",((UserInfo) getIntent().getSerializableExtra("userInfo")));
-                intent.putExtra("isPut",0);
+                intent.putExtra("userInfo", presenter.handleGetUserInfo());
+                formBrief=formBriefs.get(position);
+                formBrief.setIsPut(0);
+                intent.putExtra("isPut",formBrief);
                 presenter.handleGetTakeLeaveForm(formBriefs.get(position).getFormID());
             }
-
-
         });
         mRecyclerView.setAdapter(adapter);
     }
