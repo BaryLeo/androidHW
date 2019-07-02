@@ -4,6 +4,7 @@ import com.wyu.takeleave.BaseActivityPresenter;
 import com.wyu.takeleave.util.FormBrief;
 import com.wyu.takeleave.util.UserInfo;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -41,11 +42,17 @@ public class StudentPresenter extends BaseActivityPresenter<Student> implements 
     }
 
     @Override
+    public void getTakeLeaveForm(int formID) {
+        //调用view.setTakeLeaveForm();
+    }
+
+    @Override
     public ArrayList<FormBrief> setViewData() {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         ArrayList<FormBrief> formBriefs = new ArrayList<FormBrief>();
         for (int i =0;i<5;i++){
             FormBrief formBrief = new FormBrief();
-            formBrief.setTime(new Date());
+            formBrief.setTime(format.format(new Date()));
             formBrief.setStatus(i);
             formBriefs.add(formBrief);
         }

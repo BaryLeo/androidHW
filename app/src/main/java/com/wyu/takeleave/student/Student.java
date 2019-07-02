@@ -25,6 +25,8 @@ import com.wyu.takeleave.login.Login;
 import com.wyu.takeleave.teacher.Teacher;
 import com.wyu.takeleave.util.FormBrief;
 import com.wyu.takeleave.util.FormBrielAdapter;
+import com.wyu.takeleave.util.OnItemClickListener;
+import com.wyu.takeleave.util.TakeLeaveForm;
 import com.wyu.takeleave.util.UserInfo;
 
 import java.util.ArrayList;
@@ -39,6 +41,9 @@ public class Student extends BaseActivity<StudentPresenter> implements IStudent.
     private RecyclerView mRecyclerView;
     private FormBrielAdapter adapter;
     private RefreshLayout refreshLayout;
+    private TakeLeaveForm takeLeaveForm;
+    private ArrayList<FormBrief> formBriefs;
+    private Intent intent;
 
     @Override
     protected StudentPresenter initPresent() {
@@ -52,6 +57,7 @@ public class Student extends BaseActivity<StudentPresenter> implements IStudent.
 
     @Override
     protected void initView() {
+        formBriefs = presenter.setViewData();
         presenter.handleGetUser(((UserInfo) getIntent().getSerializableExtra("userInfo")));
         navigationView = (NavigationView) findViewById(R.id.nav_view);
 
@@ -63,8 +69,20 @@ public class Student extends BaseActivity<StudentPresenter> implements IStudent.
         mRecyclerView = (RecyclerView) findViewById(R.id.main_recylist);
         //设置线性管理器
         mRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1));
-        adapter = new FormBrielAdapter(presenter.setViewData());
+        adapter = new FormBrielAdapter(formBriefs);
+        adapter.setOnItemClickListener(new OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        intent = new Intent(Student.this,Form.class);
+                        intent.putExtra("userInfo",((UserInfo) getIntent().getSerializableExtra("userInfo")));
+                        intent.putExtra("isPut",1);
+                        presenter.getTakeLeaveForm(formBriefs.get(position).getFormID());
+                    }
+
+
+                });
         mRecyclerView.setAdapter(adapter);
+
 
         //响应侧边栏按钮
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -147,6 +165,24 @@ public class Student extends BaseActivity<StudentPresenter> implements IStudent.
                 refreshlayout.finishRefresh(1000/*,false*/);
             }
         });
+    }
+
+    @Override
+    public void setTakeLeaveForm(TakeLeaveForm takeLeaveForm) {
+        this.takeLeaveForm = takeLeaveForm;
+    }
+
+    @Override
+    public void toFormView() {
+        intent.putExtra("takeLeaveForm",takeLeaveForm);
+        startActivity(intent);
+        //销毁本activity，并回收内存
+        IntentActivity.finishActivity(Student.this);
+    }
+
+    @Override
+    public void fail(String msg) {
+        Toast.makeText(Student.this,msg,Toast.LENGTH_SHORT).show();
     }
 
 }

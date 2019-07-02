@@ -82,19 +82,19 @@ public class Form extends BaseActivity<FormPresenter> implements IForm.View{
         button.setText("提交申请");
         //获取用户信息，实现单活动多用
         userInfo = ((UserInfo) getIntent().getSerializableExtra("userInfo"));
-        if ("老师".equals(userInfo.getUserType())||"辅导员".equals(userInfo.getUserType())){
+        int flag = 0;
+        getIntent().getIntExtra("isPut",flag);
+
+        if (flag==0){
             tel.setEnabled(false);
             guaarder.setEnabled(false);
             guaarderTel.setEnabled(false);
             beginTime.setEnabled(false);
             deadTime.setEnabled(false);
             reason.setEnabled(false);
-            button.setText("同意");
 
             takeLeaveForm =((TakeLeaveForm) getIntent().getSerializableExtra("takeLeaveForm"));
             if (takeLeaveForm==null){
-
-            }else {
                 name.setText(takeLeaveForm.getUsername());
                 id.setText(takeLeaveForm.getUser_id());
                 college.setText(takeLeaveForm.getCollege());
@@ -107,115 +107,136 @@ public class Form extends BaseActivity<FormPresenter> implements IForm.View{
                 deadTime.setText(takeLeaveForm.getDead_days());
                 days.setText(takeLeaveForm.getTake_days());
                 reason.setText(takeLeaveForm.getReason());
+            }else {
+
             }
 
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
 
-                }
-            });
+            if ("老师".equals(userInfo.getUserType())||"辅导员".equals(userInfo.getUserType())){
+                button.setText("同意");
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        presenter.auditingForm(takeLeaveForm);
+                    }
+                });
+            }
+            if ("学生".equals(userInfo.getUserType())||"班级管理员".equals(userInfo.getUserType())){
+                button.setText("取消申请");
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        presenter.cancelApply(takeLeaveForm);
+                    }
+                });
+            }
         }
 
-        if ("学生".equals(userInfo.getUserType())||"班级管理员".equals(userInfo.getUserType())){
-            name.setText(userInfo.getName());
-            id.setText(userInfo.getId());
-            college.setText(userInfo.getCollege());
-            major.setText(userInfo.getMajor());
-            classId.setText(userInfo.getClassId());
+        if (flag==1){
+            if ("学生".equals(userInfo.getUserType())||"班级管理员".equals(userInfo.getUserType())){
+                name.setText(userInfo.getName());
+                id.setText(userInfo.getId());
+                college.setText(userInfo.getCollege());
+                major.setText(userInfo.getMajor());
+                classId.setText(userInfo.getClassId());
 
-            beginTime.setInputType(InputType.TYPE_NULL);
-            beginTime.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Calendar c = Calendar.getInstance();
-                    DatePickerDialog dialog = new DatePickerDialog(Form.this, new DatePickerDialog.OnDateSetListener() {
-                        @Override
-                        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                            c.set(year, monthOfYear, dayOfMonth);
-                            beginTime.setText(DateFormat.format("yyy-MM-dd", c));
-                        }
-                    }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
-                    dialog.show();
-                }
-            });
+                beginTime.setInputType(InputType.TYPE_NULL);
+                beginTime.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Calendar c = Calendar.getInstance();
+                        DatePickerDialog dialog = new DatePickerDialog(Form.this, new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                                c.set(year, monthOfYear, dayOfMonth);
+                                beginTime.setText(DateFormat.format("yyy-MM-dd", c));
+                            }
+                        }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
+                        dialog.show();
+                    }
+                });
 
 
-            deadTime.setInputType(InputType.TYPE_NULL);
-            deadTime.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Calendar c = Calendar.getInstance();
-                    DatePickerDialog dialog = new DatePickerDialog(Form.this, new DatePickerDialog.OnDateSetListener() {
-                        @Override
-                        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                            c.set(year, monthOfYear, dayOfMonth);
-                            deadTime.setText(DateFormat.format("yyy-MM-dd", c));
+                deadTime.setInputType(InputType.TYPE_NULL);
+                deadTime.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Calendar c = Calendar.getInstance();
+                        DatePickerDialog dialog = new DatePickerDialog(Form.this, new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                                c.set(year, monthOfYear, dayOfMonth);
+                                deadTime.setText(DateFormat.format("yyy-MM-dd", c));
 
-                            try {
-                                Date firstdate = format.parse(beginTime.getText().toString());
-                                Date seconddate = format.parse(deadTime.getText().toString());
-                                Calendar calendar = Calendar.getInstance();
-                                calendar.setTime(firstdate);
-                                int cnt = 0;
-                                while(calendar.getTime().compareTo(seconddate)!=0){
-                                    calendar.add(Calendar.DATE, 1);
-                                    cnt++;
+                                try {
+                                    Date firstdate = format.parse(beginTime.getText().toString());
+                                    Date seconddate = format.parse(deadTime.getText().toString());
+                                    Calendar calendar = Calendar.getInstance();
+                                    calendar.setTime(firstdate);
+                                    int cnt = 0;
+                                    while(calendar.getTime().compareTo(seconddate)!=0){
+                                        calendar.add(Calendar.DATE, 1);
+                                        cnt++;
+                                    }
+                                    days.setText(String.valueOf(cnt));
+                                    takeLeaveForm.setBegin_days(beginTime.getText().toString());
+                                    takeLeaveForm.setDead_days(deadTime.getText().toString());
+                                    takeLeaveForm.setTake_days(String.valueOf(cnt));
+                                }catch (ParseException e){
+                                    e.printStackTrace();
+                                }catch (NullPointerException e){
+                                    Toast.makeText(Form.this,"请先选择开始时间",Toast.LENGTH_SHORT).show();
+                                    e.printStackTrace();
                                 }
-                                days.setText(String.valueOf(cnt));
-                                takeLeaveForm.setBegin_days(beginTime.getText().toString());
-                                takeLeaveForm.setDead_days(deadTime.getText().toString());
-                                takeLeaveForm.setTake_days(String.valueOf(cnt));
-                            }catch (ParseException e){
-                                e.printStackTrace();
-                            }catch (NullPointerException e){
-                                Toast.makeText(Form.this,"请先选择开始时间",Toast.LENGTH_SHORT).show();
-                                e.printStackTrace();
+                            }
+                        }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
+                        dialog.show();
+                    }
+                });
+
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ArrayList<String> check = new ArrayList<>();
+                        takeLeaveForm.setUsername(userInfo.getName());
+                        takeLeaveForm.setUser_id(userInfo.getId());
+                        takeLeaveForm.setCollege(userInfo.getCollege());
+                        takeLeaveForm.setClass_id(userInfo.getClassId());
+                        takeLeaveForm.setMajor(userInfo.getMajor());
+                        takeLeaveForm.setApplyTime(new Date());
+                        takeLeaveForm.setStudent_tel(tel.getText().toString());
+                        takeLeaveForm.setGuardian_name(guaarder.getText().toString());
+                        takeLeaveForm.setGuardian_tel(guaarderTel.getText().toString());
+
+                        check.add(tel.getText().toString().trim());
+                        check.add(guaarder.getText().toString().trim());
+                        check.add(guaarderTel.getText().toString().trim());
+                        check.add(deadTime.getText().toString().trim());
+                        check.add(beginTime.getText().toString().trim());
+                        check.add(reason.getText().toString().trim());
+
+                        Boolean isFull = false;
+                        for (String str:check){
+                            if (!str.equals("")){
+                                isFull = true;
+                            }else {
+                                isFull = false;
+                                Toast.makeText(Form.this,"请填完整个表单",Toast.LENGTH_SHORT).show();
+                                break;
                             }
                         }
-                    }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
-                    dialog.show();
-                }
-            });
-
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    ArrayList<String> check = new ArrayList<>();
-                    takeLeaveForm.setUsername(userInfo.getName());
-                    takeLeaveForm.setUser_id(userInfo.getId());
-                    takeLeaveForm.setCollege(userInfo.getCollege());
-                    takeLeaveForm.setClass_id(userInfo.getClassId());
-                    takeLeaveForm.setMajor(userInfo.getMajor());
-                    takeLeaveForm.setApplyTime(new Date());
-                    takeLeaveForm.setStudent_tel(tel.getText().toString());
-                    takeLeaveForm.setGuardian_name(guaarder.getText().toString());
-                    takeLeaveForm.setGuardian_tel(guaarderTel.getText().toString());
-
-                    check.add(tel.getText().toString().trim());
-                    check.add(guaarder.getText().toString().trim());
-                    check.add(guaarderTel.getText().toString().trim());
-                    check.add(deadTime.getText().toString().trim());
-                    check.add(beginTime.getText().toString().trim());
-                    check.add(reason.getText().toString().trim());
-
-                    Boolean isFull = false;
-                    for (String str:check){
-                        if (!str.equals("")){
-                            isFull = true;
-                        }else {
-                            isFull = false;
-                            Toast.makeText(Form.this,"请填完整个表单",Toast.LENGTH_SHORT).show();
-                            break;
+                        if (isFull){
+                            presenter.putTakeLeaveForm(takeLeaveForm);
                         }
-                    }
-                    if (isFull){
-                        presenter.putTakeLeaveForm(takeLeaveForm);
-                    }
 
-                }
-            });
+                    }
+                });
+            }
         }
+
+
+
+
 
     }
 

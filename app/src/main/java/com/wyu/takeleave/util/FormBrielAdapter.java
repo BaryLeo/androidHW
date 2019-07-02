@@ -1,6 +1,7 @@
 package com.wyu.takeleave.util;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
@@ -12,8 +13,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.wyu.takeleave.R;
+import com.wyu.takeleave.student.Student;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +29,13 @@ public class FormBrielAdapter extends RecyclerView.Adapter<FormBrielAdapter.View
     private Context mContext;
 
     private List<FormBrief> formBriefs;
+
+    private OnItemClickListener mOnItemClickListener;
+
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        mOnItemClickListener = onItemClickListener;
+    }
 
     @Override
     public void onClick(View view) {
@@ -99,7 +109,12 @@ public class FormBrielAdapter extends RecyclerView.Adapter<FormBrielAdapter.View
                 break;
             }
         }
-        holder.item.setOnClickListener(this);
+        holder.item.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mOnItemClickListener.onItemClick(v, position);
+                    }
+                });
     }
 
     @Override
