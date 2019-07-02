@@ -75,7 +75,7 @@ public class Student extends BaseActivity<StudentPresenter> implements IStudent.
                     public void onItemClick(View view, int position) {
                         intent = new Intent(Student.this,Form.class);
                         intent.putExtra("userInfo",((UserInfo) getIntent().getSerializableExtra("userInfo")));
-                        intent.putExtra("isPut",1);
+                        intent.putExtra("isPut",0);
                         presenter.getTakeLeaveForm(formBriefs.get(position).getFormID());
                     }
 
@@ -99,6 +99,7 @@ public class Student extends BaseActivity<StudentPresenter> implements IStudent.
                          * 跳转到表单编辑页面
                          */
                         Intent intent = new Intent(Student.this, Form.class);
+                        intent.putExtra("isPut",1);
                         intent.putExtra("userInfo",((UserInfo) getIntent().getSerializableExtra("userInfo")));
                         startActivity(intent);
                         //销毁本activity，并回收内存
@@ -132,10 +133,6 @@ public class Student extends BaseActivity<StudentPresenter> implements IStudent.
     }
 
 
-    @Override
-    public void initRecycleView(ArrayList<FormBrief> formBriefs) {
-
-    }
 
     @Override
     public void setView(UserInfo userInfo) {

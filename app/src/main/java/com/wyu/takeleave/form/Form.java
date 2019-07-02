@@ -82,7 +82,7 @@ public class Form extends BaseActivity<FormPresenter> implements IForm.View{
         button.setText("提交申请");
         //获取用户信息，实现单活动多用
         userInfo = ((UserInfo) getIntent().getSerializableExtra("userInfo"));
-        int flag = 0;
+        int flag = 1;
         getIntent().getIntExtra("isPut",flag);
 
         if (flag==0){
@@ -95,6 +95,7 @@ public class Form extends BaseActivity<FormPresenter> implements IForm.View{
 
             takeLeaveForm =((TakeLeaveForm) getIntent().getSerializableExtra("takeLeaveForm"));
             if (takeLeaveForm==null){
+            }else {
                 name.setText(takeLeaveForm.getUsername());
                 id.setText(takeLeaveForm.getUser_id());
                 college.setText(takeLeaveForm.getCollege());
@@ -107,8 +108,6 @@ public class Form extends BaseActivity<FormPresenter> implements IForm.View{
                 deadTime.setText(takeLeaveForm.getDead_days());
                 days.setText(takeLeaveForm.getTake_days());
                 reason.setText(takeLeaveForm.getReason());
-            }else {
-
             }
 
 

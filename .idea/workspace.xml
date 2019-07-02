@@ -11,7 +11,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5c01d245-1ea2-46f8-afb2-1c85ecf225d4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/wyu/takeleave/util/OnItemClickListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/fileHashes/fileHashes.bin" afterDir="false" />
@@ -24,10 +23,9 @@
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/wyu/takeleave/student/IStudent.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/wyu/takeleave/student/IStudent.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/wyu/takeleave/student/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/wyu/takeleave/student/Student.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/wyu/takeleave/student/StudentPresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/wyu/takeleave/student/StudentPresenter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/wyu/takeleave/teacher/ITeacher.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/wyu/takeleave/teacher/ITeacher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/wyu/takeleave/teacher/Teacher.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/wyu/takeleave/teacher/Teacher.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/wyu/takeleave/teacher/TeacherPresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/wyu/takeleave/teacher/TeacherPresenter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/wyu/takeleave/util/FormBrief.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/wyu/takeleave/util/FormBrief.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/wyu/takeleave/util/FormBrielAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/wyu/takeleave/util/FormBrielAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/wyu/takeleave/util/TakeLeaveForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/wyu/takeleave/util/TakeLeaveForm.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -47,8 +45,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wyu/takeleave/student/Student.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2538">
-              <caret line="180" column="5" lean-forward="true" selection-start-line="180" selection-start-column="5" selection-end-line="180" selection-end-column="5" />
+            <state relative-caret-position="390">
+              <caret line="101" column="49" selection-start-line="101" selection-start-column="49" selection-end-line="101" selection-end-column="49" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#6767#6768#0" expanded="true" />
@@ -61,14 +59,28 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wyu/takeleave/form/Form.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1149">
-              <caret line="128" column="46" selection-start-line="128" selection-start-column="46" selection-end-line="128" selection-end-column="46" />
+            <state relative-caret-position="249">
+              <caret line="96" column="37" selection-start-line="96" selection-start-column="37" selection-end-line="96" selection-end-column="37" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#4292#4293#0" expanded="true" />
                 <element signature="e#4377#4378#0" expanded="true" />
                 <element signature="e#4696#4697#0" expanded="true" />
                 <element signature="e#4781#4782#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wyu/takeleave/teacher/Teacher.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="344">
+              <caret line="73" column="21" selection-start-line="73" selection-start-column="21" selection-end-line="73" selection-end-column="21" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#7465#7466#0" expanded="true" />
+                <element signature="e#7539#7540#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -87,10 +99,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wyu/takeleave/student/IStudent.java">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wyu/takeleave/student/StudentPresenter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="403">
-              <caret line="24" column="20" lean-forward="true" selection-start-line="24" selection-start-column="20" selection-end-line="24" selection-end-column="20" />
+            <state relative-caret-position="453">
+              <caret line="60" column="43" selection-start-line="60" selection-start-column="43" selection-end-line="60" selection-end-column="43" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -99,10 +111,22 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wyu/takeleave/student/StudentPresenter.java">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wyu/takeleave/student/IStudent.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="45" column="12" selection-start-line="45" selection-start-column="12" selection-end-line="45" selection-end-column="12" />
+            <state relative-caret-position="384">
+              <caret line="23" column="42" selection-start-line="22" selection-start-column="8" selection-end-line="23" selection-end-column="42" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wyu/takeleave/teacher/ITeacher.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="209">
+              <caret line="11" column="23" selection-start-line="11" selection-start-column="23" selection-end-line="11" selection-end-column="23" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -125,24 +149,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wyu/takeleave/teacher/TeacherPresenter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="440">
-              <caret line="49" column="5" lean-forward="true" selection-start-line="49" selection-start-column="5" selection-end-line="49" selection-end-column="5" />
+            <state relative-caret-position="553">
+              <caret line="52" column="14" selection-start-line="52" selection-start-column="14" selection-end-line="52" selection-end-column="14" />
               <folding>
                 <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wyu/takeleave/util/FormBrielAdapter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1161">
-              <caret line="33" selection-start-line="33" selection-end-line="33" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#3806#3807#0" expanded="true" />
-                <element signature="e#3899#3900#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -158,18 +168,6 @@
                 <element signature="e#531#532#0" expanded="true" />
                 <element signature="e#572#573#0" expanded="true" />
                 <element signature="e#608#609#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wyu/takeleave/util/TakeLeaveForm.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="95">
-              <caret line="6" column="50" selection-start-line="6" selection-start-column="50" selection-end-line="6" selection-end-column="50" />
-              <folding>
-                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -223,9 +221,7 @@
         <option value="$PROJECT_DIR$/app/src/main/res/menu/activity_main_teacher.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/menu/activity_main_student.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main_teacher.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/wyu/takeleave/teacher/ITeacher.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/wyu/takeleave/BaseActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/wyu/takeleave/teacher/Teacher.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/wyu/takeleave/util/UserInfo.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/wyu/takeleave/login/Login.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/takeleave.xml" />
@@ -237,13 +233,15 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/content_main_teacher.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/wyu/takeleave/form/IForm.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/wyu/takeleave/form/FormPresenter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/wyu/takeleave/teacher/TeacherPresenter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/wyu/takeleave/util/OnItemClickListener.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/wyu/takeleave/util/FormBrielAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/wyu/takeleave/util/TakeLeaveForm.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/wyu/takeleave/util/FormBrief.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/wyu/takeleave/student/IStudent.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/wyu/takeleave/teacher/ITeacher.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/wyu/takeleave/teacher/Teacher.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/wyu/takeleave/student/Student.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/wyu/takeleave/teacher/TeacherPresenter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/wyu/takeleave/student/StudentPresenter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/wyu/takeleave/form/Form.java" />
       </list>
@@ -388,6 +386,19 @@
               <item name="wyu" type="462c0819:PsiDirectoryNode" />
               <item name="takeleave" type="462c0819:PsiDirectoryNode" />
               <item name="student" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="androidHW" type="b2602c69:ProjectViewProjectNode" />
+              <item name="androidHW" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="wyu" type="462c0819:PsiDirectoryNode" />
+              <item name="takeleave" type="462c0819:PsiDirectoryNode" />
+              <item name="student" type="462c0819:PsiDirectoryNode" />
+              <item name="StudentModel.java" type="529ef68f:ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
             </path>
             <path>
               <item name="androidHW" type="b2602c69:ProjectViewProjectNode" />
@@ -561,7 +572,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1920" height="977" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
       <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.17199148" />
@@ -676,26 +686,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="266">
           <caret line="14" column="5" selection-start-line="3" selection-start-column="4" selection-end-line="14" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wyu/takeleave/teacher/ITeacher.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="14" selection-start-line="14" selection-end-line="14" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wyu/takeleave/teacher/Teacher.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1320">
-          <caret line="115" column="76" selection-start-line="115" selection-start-column="76" selection-end-line="115" selection-end-column="76" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -922,48 +912,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wyu/takeleave/student/Student.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2538">
-          <caret line="180" column="5" lean-forward="true" selection-start-line="180" selection-start-column="5" selection-end-line="180" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#6767#6768#0" expanded="true" />
-            <element signature="e#6844#6845#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wyu/takeleave/student/IStudent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="403">
-          <caret line="24" column="20" lean-forward="true" selection-start-line="24" selection-start-column="20" selection-end-line="24" selection-end-column="20" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wyu/takeleave/student/StudentPresenter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="45" column="12" selection-start-line="45" selection-start-column="12" selection-end-line="45" selection-end-column="12" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wyu/takeleave/teacher/TeacherPresenter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="440">
-          <caret line="49" column="5" lean-forward="true" selection-start-line="49" selection-start-column="5" selection-end-line="49" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wyu/takeleave/util/TakeLeaveForm.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="95">
@@ -1007,10 +955,74 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wyu/takeleave/student/IStudent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="384">
+          <caret line="23" column="42" selection-start-line="22" selection-start-column="8" selection-end-line="23" selection-end-column="42" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wyu/takeleave/teacher/ITeacher.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="11" column="23" selection-start-line="11" selection-start-column="23" selection-end-line="11" selection-end-column="23" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wyu/takeleave/teacher/Teacher.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="344">
+          <caret line="73" column="21" selection-start-line="73" selection-start-column="21" selection-end-line="73" selection-end-column="21" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#7465#7466#0" expanded="true" />
+            <element signature="e#7539#7540#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wyu/takeleave/teacher/TeacherPresenter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="553">
+          <caret line="52" column="14" selection-start-line="52" selection-start-column="14" selection-end-line="52" selection-end-column="14" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wyu/takeleave/student/StudentPresenter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="453">
+          <caret line="60" column="43" selection-start-line="60" selection-start-column="43" selection-end-line="60" selection-end-column="43" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wyu/takeleave/student/Student.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="101" column="49" selection-start-line="101" selection-start-column="49" selection-end-line="101" selection-end-column="49" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#6767#6768#0" expanded="true" />
+            <element signature="e#6844#6845#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wyu/takeleave/form/Form.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1149">
-          <caret line="128" column="46" selection-start-line="128" selection-start-column="46" selection-end-line="128" selection-end-column="46" />
+        <state relative-caret-position="249">
+          <caret line="96" column="37" selection-start-line="96" selection-start-column="37" selection-end-line="96" selection-end-column="37" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#4292#4293#0" expanded="true" />

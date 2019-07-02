@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 public interface IStudent {
     interface View{
-        void initRecycleView(ArrayList<FormBrief> formBriefs);
         void setView(UserInfo userInfo);
         void refresh();
         void setTakeLeaveForm(TakeLeaveForm takeLeaveForm);

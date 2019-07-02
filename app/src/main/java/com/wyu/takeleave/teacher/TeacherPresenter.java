@@ -44,6 +44,16 @@ public class TeacherPresenter extends BaseActivityPresenter<Teacher> implements 
     }
 
     @Override
+    public void handleGetUser(UserInfo userInfo) {
+
+    }
+
+    @Override
+    public void getTakeLeaveForm(int formID) {
+        //调用这个view.setTakeLeaveForm();
+    }
+
+    @Override
     public Boolean logout() {
         //处理注销事件
         return false;
