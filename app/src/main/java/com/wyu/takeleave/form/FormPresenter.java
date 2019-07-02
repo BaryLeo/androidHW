@@ -42,11 +42,32 @@ public class FormPresenter extends BaseActivityPresenter<Form> implements IForm.
     @Override
     public void handleAuditingForm(TakeLeaveForm takeLeaveForm) {
         //表单审核
+        model.auditingForm(takeLeaveForm, new ValueCallBack<String>() {
+            @Override
+            public void onSuccess(String s) {
+                view.handleApplySuccess(s);
+            }
 
+            @Override
+            public void onFail(String msg) {
+                view.handleApplyFail(msg);
+            }
+        });
     }
 
     @Override
     public void handleCancelApply(TakeLeaveForm takeLeaveForm) {
         //取消表单申请
+        model.cancelApply(takeLeaveForm, new ValueCallBack<String>() {
+            @Override
+            public void onSuccess(String s) {
+                view.handleApplySuccess(s);
+            }
+
+            @Override
+            public void onFail(String msg) {
+                view.handleApplyFail(msg);
+            }
+        });
     }
 }

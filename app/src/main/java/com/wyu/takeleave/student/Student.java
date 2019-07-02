@@ -70,7 +70,7 @@ public class Student extends BaseActivity<StudentPresenter> implements IStudent.
 
         presenter.handleGetUser(((UserInfo) getIntent().getSerializableExtra("userInfo")));
         formBriefs = new ArrayList<FormBrief>();
-        navigationView = (NavigationView) findViewById(R.id.nav_view);
+
 
         //通过侧边栏组件，才能操作侧边栏里面的组件
         id = navigationView.getHeaderView(0).findViewById(R.id.userId);
@@ -81,6 +81,7 @@ public class Student extends BaseActivity<StudentPresenter> implements IStudent.
         //设置线性管理器
 
         presenter.handleGetTakeLeave();
+
         //响应侧边栏按钮
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -195,8 +196,8 @@ public class Student extends BaseActivity<StudentPresenter> implements IStudent.
     public void toFormView() {
         intent.putExtra("takeLeaveForm",takeLeaveForm);
         startActivity(intent);
-        //销毁本activity，并回收内存
-        IntentActivity.finishActivity(Student.this);
+        //销毁本activity，并回收内存（CrabSAMA：这里销毁的话，用户想返回都不行，用户体验差）
+        //IntentActivity.finishActivity(Student.this);
     }
 
     @Override

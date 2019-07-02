@@ -180,8 +180,8 @@ public class Teacher extends BaseActivity<TeacherPresenter> implements ITeacher.
     public void toFormView() {
         intent.putExtra("takeLeaveForm",takeLeaveForm);
         startActivity(intent);
-        //销毁本activity，并回收内存
-        IntentActivity.finishActivity(this);
+        //销毁本activity，并回收内存（CrabSAMA：这里销毁的话，用户想返回都不行，用户体验差）
+        //IntentActivity.finishActivity(this);
     }
 
     @Override

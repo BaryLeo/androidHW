@@ -60,6 +60,7 @@
             android:layout_toRightOf="@id/pwLogo"
             android:layout_width="match_parent"
             android:layout_height="40dp"
+            android:inputType="textPassword"
             android:hint="请输入你的密码"/>
 
 
@@ -67,7 +68,7 @@
 
     <Button
         android:id="@+id/login"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
         android:layout_below="@id/pwlayout"
         android:layout_width="match_parent"
         android:layout_height="40dp"
@@ -75,6 +76,9 @@
         android:layout_marginRight="70dp"
         android:layout_centerHorizontal="true"
         android:text="登录"
-        android:background="@color/green"/>
+        android:textColor="#FFF"
+        android:background="@drawable/button_shape"/>
+
+
 
 </RelativeLayout>

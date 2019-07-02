@@ -62,9 +62,10 @@ public class FormModel implements IForm.Model{
         try{
             OkHttpUtils
                     .post()
+                    .url(AUDITINGLEAVE)
                     .addParams("formIds", takeLeaveForm.getForm_id().toString())
                     .addParams("isPermit", takeLeaveForm.getInstructor_permit().toString())
-                    .addParams("reply", "123")  //TODO:改成reply
+                    .addParams("reply", takeLeaveForm.getReply())
                     .build()
                     .execute(new StringCallback() {
                         @Override
@@ -89,6 +90,7 @@ public class FormModel implements IForm.Model{
         try{
             OkHttpUtils
                     .post()
+                    .url(CANCLELEAVE)
                     .addParams("fromId", takeLeaveForm.getForm_id().toString())  //TODO:后端设了fromId这个键值
                     .build()
                     .execute(new StringCallback() {
