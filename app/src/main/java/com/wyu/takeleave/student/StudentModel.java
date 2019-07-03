@@ -79,8 +79,8 @@ public class StudentModel implements IStudent.Model{
                 data.setBegin_days(form.getContent().get(i).getBeginDays());
                 data.setReason(form.getContent().get(i).getReason());
                 data.setForm_id(form.getContent().get(i).getFormId());
+                return data;
             }
-            return data;
         }
         return null;
     }
