@@ -13,8 +13,6 @@ import android.widget.Toast;
 import com.wyu.takeleave.BaseActivity;
 import com.wyu.takeleave.IntentActivity;
 import com.wyu.takeleave.R;
-import com.wyu.takeleave.ValueCallBack;
-import com.wyu.takeleave.login.Login;
 import com.wyu.takeleave.student.Student;
 import com.wyu.takeleave.teacher.Teacher;
 import com.wyu.takeleave.util.FormBrief;
